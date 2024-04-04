@@ -6,6 +6,7 @@
     <title>Login Page</title>
     <!-- Vue.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/signup.css">
 </head>
@@ -16,7 +17,8 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
             </a>
             <h2>Criar Conta</h2>
-            <input type="text" v-model="username" placeholder="Username">
+            <input type="text" v-model="name" placeholder="Nome">
+            <input type="text" v-model="login" placeholder="Login">
             <input type="password" v-model="password" placeholder="Senha">
             <input type="password" v-model="confirmPassword" placeholder="Confirme a senha">
             <button @click="signup">Criar</button>

@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Home</title>
     <link rel="stylesheet" href="styles/Home.css">
+    <!-- Include Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>E-commerce Store</h1>    
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="views/about.html">Sobre Nós</a></li>
-                    <li><a href="views/login.html">Login</a></li>
-                </ul>
-            </nav>
+        <div class="topo">
+            <div class="logo">
+                <h1>E-commerce Store</h1>    
+                <nav>
+                    <ul>
+                        <li><a href="/Home.html">Home</a></li>
+                        <li><a href="views/about.html">Sobre Nós</a></li>
+                        <li><a href="views/login.html">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="app">
+                <div class="user">
+                    <p v-if="nome" class="nome-place">{{ nome }}</p>
+                    <p v-else class="nome-place" style="margin-top: 30px;">Deslogado</p>
+                    <span v-if="nome" class="logout-btn" @click="disconnect">Desconectar</span>
+                </div>
+            </div>
         </div>
+        
     </header>
     <section class="hero">
         <div class="container">
@@ -62,5 +74,6 @@
         </div>
     </footer>
 
+    <script src="/components/Home.js"></script>
 </body>
 </html>

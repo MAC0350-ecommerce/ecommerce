@@ -6,6 +6,7 @@
     <title>Login Page</title>
     <!-- Vue.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/login.css">
 </head>
@@ -15,12 +16,12 @@
             <a href="../Home.html">
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
             </a>
-            <h2>Login</h2>
-            <input type="text" v-model="username" placeholder="Username">
+            <h2>Entrar</h2>
+            <input type="text" v-model="login" placeholder="Login">
             <input type="password" v-model="password" placeholder="Senha">
-            <button @click="login">Login</button>
+            <button @click="access">Entrar</button>
             <h5>Não tem conta? <a href="../views/signup.html">Criar Conta</a></h5>
-            <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+            <div class="error-message">{{ errorMessage }}</div>
         </div>
     </div>
     <footer>
