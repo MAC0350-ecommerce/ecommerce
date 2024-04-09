@@ -1,4 +1,4 @@
-# E-Comerce
+# E-Commerce
 
 Projeto desenvolvido para a disciplina de MAC0350 - Introdução ao Desenvolvimento de Sistemas de Software
 
