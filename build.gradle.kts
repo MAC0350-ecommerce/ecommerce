@@ -35,6 +35,8 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.flywaydb:flyway-mysql:10.0.0")
+	compileOnly("org.flywaydb:flyway-core:10.0.0")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -53,4 +55,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+buildscript {
+	dependencies {
+		classpath("org.flywaydb:flyway-mysql:10.0.0")
+	}
 }

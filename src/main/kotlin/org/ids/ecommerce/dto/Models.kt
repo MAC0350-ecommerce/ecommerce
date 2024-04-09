@@ -1,8 +1,8 @@
 package org.ids.ecommerce.dto
 
-data class UsuarioReq (var nome: String, var login: String, var senha: String)
+data class UsuarioReq (var nome: String, var login: String, var senha: String, var foto: ByteArray)
 
-data class UsuarioRes (var id: Int, var nome: String, var login: String)
+data class UsuarioRes(var id: Int, var nome: String, var login: String, var foto: ByteArray?=null)
 
 data class RefreshTokenRequest (val token: String)
 
