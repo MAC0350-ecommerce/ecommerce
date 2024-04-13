@@ -1,6 +1,6 @@
 services:
   mysql-dev:
-    image: 'mysql:latest'
+    image: 'mysql:8.3.0'
     environment:
       - 'MYSQL_DATABASE=ecommerce'
       - 'MYSQL_PASSWORD=1234'
