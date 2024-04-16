@@ -5,9 +5,12 @@ new Vue({
         login: '',
         password: '',
         confirmPassword: '',
-        errorMessage: ''
+        errorMessage: '',
+        imageName: '',
+        imageBytes: []
     },
     methods: {
+        // criar conta
         signup() {
             this.errorMessage = '';
 
@@ -25,7 +28,8 @@ new Vue({
             const userData = {
                 nome: this.name,
                 login: this.login,
-                senha: this.password
+                senha: this.password,
+                foto: this.imageBytes
             };
 
             // POST request 
@@ -35,9 +39,24 @@ new Vue({
                     window.location.href = '/views/login.html';
                 })
                 .catch(error => {
-                    this.errorMessage = "Criação de conta falhou";
-                    // console.error(error);
+                    this.errorMessage = error; 
                 });
-        }
+        },
+        // upload da foto
+        handleFileUpload(event) {
+            const file = event.target.files[0];
+            this.imageName = file.name;
+
+            // converte parra array de bytes
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const arrayBuffer = reader.result;
+                    this.imageBytes = new Uint8Array(arrayBuffer);
+                    this.imageBytes = Array.from(this.imageBytes);
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }            
     }
 });
