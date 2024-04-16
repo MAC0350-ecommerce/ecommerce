@@ -1,5 +1,5 @@
 services:
-  mysql-dev:
+  mysql-test:
     image: 'mysql:8.3.0'
     environment:
       - 'MYSQL_DATABASE=ecommerce'

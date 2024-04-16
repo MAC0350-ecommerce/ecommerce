@@ -22,9 +22,9 @@ class Usuarios {
     }
 
     @PostMapping
-    fun create(@RequestBody usuarioRequest: UsuarioReq): UsuarioRes =
+    fun criaUsuario(@RequestBody usuarioRequest: UsuarioReq): UsuarioRes =
         usuarioService?.criaUsuario(usuarioRequest)
-            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot create user.")
+            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não pode ser criado")
 
     @GetMapping("/{login}")
     fun findByLogin(@PathVariable login: String) = usuarioService?.findByLogin(login)
