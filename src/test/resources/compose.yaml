@@ -1,0 +1,10 @@
+services:
+  mysql-test:
+    image: 'mysql:8.3.0'
+    environment:
+      - 'MYSQL_DATABASE=ecommerce'
+      - 'MYSQL_PASSWORD=1234'
+      - 'MYSQL_ROOT_PASSWORD=1234'
+      - 'MYSQL_USER=ecommerce'
+    ports:
+      - '3306:3306'
