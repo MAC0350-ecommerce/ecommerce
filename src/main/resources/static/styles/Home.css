@@ -13,12 +13,28 @@ body {
 }
 
 .user {
-    /* display: flex; */
-    justify-content: space-between;
-    /* align-items: center; */
-    text-align: center;
-    /* padding: 10px 0; */
+    display: flex;
+    align-items: center; /* Aligns items vertically */
     margin-right: 63px;
+}
+
+.user-img {
+    width: 75px; /* Adjust as needed */
+    height: 75px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the entire circle */
+    object-position: center; /* Centers the image within the circle */
+    margin-left: 13px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Align items vertically */
+}
+
+.user-info p, .user-info span {
+    margin: 0px 0; /* Adjust the vertical margin */
 }
 
 .topo {

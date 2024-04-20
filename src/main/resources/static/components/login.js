@@ -6,6 +6,7 @@ new Vue({
         errorMessage: ''
     },
     methods: {
+        // Login
         access() {
             this.errorMessage = '';
             // Verifica se os campos estão preenchidos
@@ -22,24 +23,36 @@ new Vue({
 
             // POST request
             axios.post('http://localhost:8080/api/auth/login', userData)
+            .catch(error => {
+                this.errorMessage = 'Usuário ou Senha incorretos';
+            })
+            .then(response => {
+                // Salva os tokens no localStorage
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);     
+                
+                // Define headers
+                const accessToken = response.data.accessToken;
+                const headers = {
+                    Authorization: 'Bearer ' + accessToken 
+                };
+                
+                // GET request
+                axios.get('http://localhost:8080/api/usuarios/' + this.login, { headers })
                 .then(response => {
-                    // salva tokens
-                    sessionStorage.setItem('accessToken', response.data.accessToken);
-                    sessionStorage.setItem('refreshToken', response.data.refreshToken);
-                    sessionStorage.setItem('login', this.login);
+                    // Salva informações do usuario no localStorage
+                    localStorage.setItem('login', this.login);
+                    localStorage.setItem('nome', response.data.nome);
+                    localStorage.setItem('foto', response.data.foto);
 
+                    // Redireciona pra Home
                     window.location.href = '/Home.html';
                 })
                 .catch(error => {
-                    this.errorMessage = 'Usuário ou Senha incorretos';
-                    // console.error(error);
+                    this.errorMessage = error; 
                 });
+            });
         }
     }
 });
 
-
-// if (this.login === 'admin' && this.password === 'admin') {
-//     alert('Login efetuado com sucesso');
-//     window.location.href = '/Home.html';
-// }

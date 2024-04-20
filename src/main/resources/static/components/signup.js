@@ -34,13 +34,13 @@ new Vue({
 
             // POST request 
             axios.post('http://localhost:8080/api/usuarios', userData)
-                .then(response => {
-                    alert('Conta criada com sucesso!');
-                    window.location.href = '/views/login.html';
-                })
-                .catch(error => {
-                    this.errorMessage = error; 
-                });
+            .then(response => {
+                alert('Conta criada com sucesso!');
+                window.location.href = '/views/login.html';
+            })
+            .catch(error => {
+                this.errorMessage = error; 
+            });
         },
         // upload da foto
         handleFileUpload(event) {
