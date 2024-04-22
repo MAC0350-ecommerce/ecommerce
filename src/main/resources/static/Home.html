@@ -16,15 +16,15 @@
                 <h1>E-commerce Store</h1>
                 <nav>
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">Sobre Nós</a></li>
-                        <li v-if="!nome"><a href="/login">Login</a></li>
+                        <li><a href="/" id="home">Home</a></li>
+                        <li><a href="/about" id="about">Sobre Nós</a></li>
+                        <li v-if="!nome"><a href="/login" id="login-button">Login</a></li>
                         <li v-if="nome"><span v-if="nome" class="logout-btn" @click="disconnect">Desconectar</span>
                     </ul>
                 </nav>
             </div>
             <div class="user">
-                <p v-if="nome" >{{ nome }}</p>
+                <p v-if="nome" id="nome">{{ nome }}</p>
                 <img id="display1" src="" class="user-img">
             </div>
         </div>

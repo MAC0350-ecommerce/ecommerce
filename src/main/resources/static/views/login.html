@@ -14,13 +14,13 @@
 <div id="app">
     <div class="login-container">
         <a href="/">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button" id="voltar">
         </a>
         <h2>Entrar</h2>
-        <input type="text" v-model="login" placeholder="Login">
-        <input type="password" v-model="password" placeholder="Senha">
-        <button @click="access">Entrar</button>
-        <h5>Não tem conta? <a href="/signup">Criar Conta</a></h5>
+        <input type="text" v-model="login" placeholder="Login" id="login">
+        <input type="password" v-model="password" placeholder="Senha" id="senha">
+        <button @click="access" id="login-button">Entrar</button>
+        <h5>Não tem conta? <a href="/signup" id='signup-button'>Criar Conta</a></h5>
         <div class="error-message">{{ errorMessage }}</div>
     </div>
 </div>

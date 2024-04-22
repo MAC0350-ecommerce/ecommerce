@@ -16,7 +16,7 @@
                 <h1>E-commerce Store</h1>
                 <nav>
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/" id="home">Home</a></li>
                         <li><a href="/about">Sobre Nós</a></li>
                         <li v-if="!nome"><a href="/login">Login</a></li>
                         <li v-if="nome"><span v-if="nome" class="logout-btn" @click="disconnect">Desconectar</span>

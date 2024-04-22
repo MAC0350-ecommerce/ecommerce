@@ -14,16 +14,16 @@
 <div id="app">
     <div class="login-container">
         <!-- Icone voltar -->
-        <a href="/">
+        <a href="/" id="voltar">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
         </a>
         <h2>Criar Conta</h2>
 
         <!-- Caixas de input -->
-        <input type="text" v-model="name" placeholder="Nome">
-        <input type="text" v-model="login" placeholder="Login">
-        <input type="password" v-model="password" placeholder="Senha">
-        <input type="password" v-model="confirmPassword" placeholder="Confirmar senha">
+        <input type="text" v-model="name" placeholder="Nome" id="nome">
+        <input type="text" v-model="login" placeholder="Login" id="login">
+        <input type="password" v-model="password" placeholder="Senha" id="senha">
+        <input type="password" v-model="confirmPassword" placeholder="Confirmar senha" id="confirmar-senha">
 
         <!-- Upload da imagem -->
         <div class="file-upload-container">
