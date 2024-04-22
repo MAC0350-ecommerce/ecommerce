@@ -21,26 +21,26 @@ new Vue({
             localStorage.removeItem('login');
             localStorage.removeItem('nome');
             localStorage.removeItem('foto');
-            
+
             // Limpa os itens do Vue
             this.accessToken = '';
             this.refreshToken = '';
             this.nome = '';
             this.foto = '';
-            
+
             // Seta a foto placeholder
             userImg = document.getElementById('display1');
-            userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png'; 
+            userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
         },
         // Exibe a foto do usuário
         displayUserImage() {
             var userImg = document.getElementById('display1');
             this.foto = localStorage.getItem('foto');
-            if (this.foto) {
+            if (this.foto !== 'null') {
                 userImg.src = 'data:image/png;base64,' + this.foto.replace(/"/g, '');;
             }
             else {
-                userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png'; 
+                userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
             }
         }
     }

@@ -7,7 +7,7 @@ new Vue({
         confirmPassword: '',
         errorMessage: '',
         imageName: '',
-        imageBytes: []
+        imageBytes: null
     },
     methods: {
         // criar conta
@@ -24,7 +24,7 @@ new Vue({
                 return;
             }
 
-            // Organiza os dados do usuário 
+            // Organiza os dados do usuário
             const userData = {
                 nome: this.name,
                 login: this.login,
@@ -32,15 +32,15 @@ new Vue({
                 foto: this.imageBytes
             };
 
-            // POST request 
-            axios.post('http://localhost:8080/api/usuarios', userData)
-            .then(response => {
-                alert('Conta criada com sucesso!');
-                window.location.href = '/views/login.html';
-            })
-            .catch(error => {
-                this.errorMessage = error; 
-            });
+            // POST request
+            axios.post('http://localhost:8080/api/cadastros', userData)
+                .then(response => {
+                    alert('Conta criada com sucesso!');
+                    window.location.href = '/views/login.html';
+                })
+                .catch(error => {
+                    this.errorMessage = error;
+                });
         },
         // upload da foto
         handleFileUpload(event) {
@@ -57,6 +57,6 @@ new Vue({
                 };
                 reader.readAsArrayBuffer(file);
             }
-        }            
+        }
     }
 });

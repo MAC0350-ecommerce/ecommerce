@@ -23,12 +23,14 @@ class SegurancaApi(
         jwtFiltro: JwtFiltro
     ): DefaultSecurityFilterChain =
         http
-            .csrf { it.disable() }
+            .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
                     // TODO: Fechar o endpoint depois de configurar as migrations
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/usuarios")).permitAll()
                     .requestMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
+
+                    .requestMatchers("/").permitAll()
 
                     // TODO: Alterar depois de configurar a segurança
                     .anyRequest().permitAll()

@@ -5,48 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Home</title>
     <link rel="stylesheet" href="../styles/about.css">
+    <!-- Include Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>E-commerce Store</h1>    
-            <nav>
-                <ul>
-                    <li><a href="../Home.html">Home</a></li>
-                    <li><a href="../views/about.html">Sobre Nós</a></li>
-                    <li><a href="../views/login.html">Login</a></li>
-                </ul>
-            </nav>
+<header>
+    <div id="app">
+        <div class="topo">
+            <div class="logo">
+                <h1>E-commerce Store</h1>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">Sobre Nós</a></li>
+                        <li v-if="!nome"><a href="/login">Login</a></li>
+                        <li v-if="nome"><span v-if="nome" class="logout-btn" @click="disconnect">Desconectar</span>
+                    </ul>
+                </nav>
+            </div>
+            <div class="user">
+                <p v-if="nome" >{{ nome }}</p>
+                <img id="display1" src="" class="user-img">
+            </div>
         </div>
-    </header>
-    
-    <div class="about-container">
-        <main>
-            <section>
-                <h2>Projeto</h2>
-                <p>Projeto desenvolvido para a disciplina de <a href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAC0350&codcur=45052&codhab=1" target="_blank">MAC0350</a> - Introdução ao Desenvolvimento de Sistemas de Software</p>
-                <p>Instituto de Matemática e Estatística - IME (01/2024)</p>
-                <p>Ministrada por <a href="https://lattes.ime.usp.br/mac/membro-2193972715230641.html" target="_blank">Paulo Roberto Miranda Meirelles</a></p>
-            </section>
-            <section>
-                <h2>Criadores</h2>
-                <ul>
-                    <li>Marcelo Nascimento</li>
-                    <li>Victor Nascimento Ribeiro</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Código fonte</h2>
-                <a href="https://github.com/MAC0350-ecommerce/ecommerce/" target="_blank">GitHub</a>
-            </section>
-        </main>
     </div>
+</header>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
-        </div>
-    </footer>
 
+<div class="about-container">
+    <main>
+        <section>
+            <h2>Projeto</h2>
+            <p>Projeto desenvolvido para a disciplina de <a href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAC0350&codcur=45052&codhab=1" target="_blank">MAC0350</a> - Introdução ao Desenvolvimento de Sistemas de Software</p>
+            <p>Instituto de Matemática e Estatística - IME (01/2024)</p>
+            <p>Ministrada por <a href="https://lattes.ime.usp.br/mac/membro-2193972715230641.html" target="_blank">Paulo Roberto Miranda Meirelles</a></p>
+        </section>
+        <section>
+            <h2>Criadores</h2>
+            <ul>
+                <li>Marcelo Nascimento</li>
+                <li>Victor Nascimento Ribeiro</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Código fonte</h2>
+            <a href="https://github.com/MAC0350-ecommerce/ecommerce/" target="_blank">GitHub</a>
+        </section>
+    </main>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
+    </div>
+</footer>
+
+<script src="/components/Home.js"></script>
 </body>
 </html>
