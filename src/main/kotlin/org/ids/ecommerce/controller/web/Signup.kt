@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class Signup {
 
-    @GetMapping("/login")
+    @GetMapping("/signup")
     fun home(model: Model): String {
-        return "/views/login.html"
+        return "/views/signup.html"
     }
 }

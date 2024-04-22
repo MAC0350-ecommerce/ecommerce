@@ -4,7 +4,7 @@ new Vue({
         accessToken: '',
         refreshToken: '',
         nome: '',
-        foto: ''
+        foto: 'null'
     },
     mounted() {
         // Pega os itens da localStorage
@@ -25,8 +25,8 @@ new Vue({
             // Limpa os itens do Vue
             this.accessToken = '';
             this.refreshToken = '';
-            this.nome = '';
-            this.foto = '';
+            this.nome = ''; 
+            this.foto = 'null';
 
             // Seta a foto placeholder
             userImg = document.getElementById('display1');
@@ -36,7 +36,7 @@ new Vue({
         displayUserImage() {
             var userImg = document.getElementById('display1');
             this.foto = localStorage.getItem('foto');
-            if (this.foto !== 'null') {
+            if (this.foto && this.foto !== 'null') {
                 userImg.src = 'data:image/png;base64,' + this.foto.replace(/"/g, '');;
             }
             else {

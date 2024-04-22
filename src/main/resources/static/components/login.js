@@ -46,7 +46,7 @@ new Vue({
                             localStorage.setItem('foto', response.data.foto);
 
                             // Redireciona pra Home
-                            window.location.href = '/Home.html';
+                            window.location.href = '/';
                         })
                         .catch(error => {
                             this.errorMessage = error;

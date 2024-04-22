@@ -9,6 +9,6 @@ class Login {
 
     @GetMapping("/login")
     fun home(model: Model): String {
-        return "Login.html"
+        return "/views/login.html"
     }
 }
