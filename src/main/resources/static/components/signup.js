@@ -5,9 +5,12 @@ new Vue({
         login: '',
         password: '',
         confirmPassword: '',
-        errorMessage: ''
+        errorMessage: '',
+        imageName: '',
+        imageBytes: null
     },
     methods: {
+        // criar conta
         signup() {
             this.errorMessage = '';
 
@@ -21,23 +24,39 @@ new Vue({
                 return;
             }
 
-            // Organiza os dados do usuário 
+            // Organiza os dados do usuário
             const userData = {
                 nome: this.name,
                 login: this.login,
-                senha: this.password
+                senha: this.password,
+                foto: this.imageBytes
             };
 
-            // POST request 
+            // POST request
             axios.post('http://localhost:8080/api/cadastros', userData)
                 .then(response => {
                     alert('Conta criada com sucesso!');
-                    window.location.href = '/views/login.html';
+                    window.location.href = '/login';
                 })
                 .catch(error => {
-                    this.errorMessage = "Criação de conta falhou";
-                    // console.error(error);
+                    this.errorMessage = error;
                 });
+        },
+        // upload da foto
+        handleFileUpload(event) {
+            const file = event.target.files[0];
+            this.imageName = file.name;
+
+            // converte parra array de bytes
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const arrayBuffer = reader.result;
+                    this.imageBytes = new Uint8Array(arrayBuffer);
+                    this.imageBytes = Array.from(this.imageBytes);
+                };
+                reader.readAsArrayBuffer(file);
+            }
         }
     }
 });
