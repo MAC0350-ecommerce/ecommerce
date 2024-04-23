@@ -51,9 +51,11 @@ class CadastroService (
     }
 
     fun findAll() : List<UsuarioRes> {
-        val cadastros =  cadastroRepository.findAll();
-        var listaCadastros = emptyList<UsuarioRes>()
-        for (c in cadastros) {
+        var cadastros =  cadastroRepository.findAll();
+        var listaCadastros = mutableListOf<UsuarioRes>()
+        cadastros = cadastros.toList()
+
+        cadastros.forEach { c ->
             var cadastro =
                 c.id?.let {
                     UsuarioRes (
@@ -64,8 +66,11 @@ class CadastroService (
                         papel = c.papel.name
                     )
                 }
-            listaCadastros.addFirst(cadastro)
+            if (cadastro != null) {
+                listaCadastros.add(cadastro)
+            }
         }
+
         return listaCadastros
     }
 }

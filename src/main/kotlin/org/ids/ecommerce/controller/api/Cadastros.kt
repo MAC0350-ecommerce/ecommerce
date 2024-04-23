@@ -1,5 +1,6 @@
 package org.ids.ecommerce.controller.api
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.ids.ecommerce.dto.UsuarioReq
 import org.ids.ecommerce.dto.UsuarioRes
 import org.ids.ecommerce.service.CadastroService
@@ -14,11 +15,13 @@ class Cadastros {
     @Autowired
     var cadastroService: CadastroService? = null
 
-    @GetMapping
-    fun getUsuarios(): List<UsuarioRes> {
-        return cadastroService?.findAll()
+    @GetMapping("/")
+    fun getCadastros(): List<UsuarioRes> {
+        var cadastros = cadastroService?.findAll()
             ?: throw ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Lista de cadastros não pode ser obtida")
+
+        return cadastros
     }
 
     @GetMapping("/{login}")
