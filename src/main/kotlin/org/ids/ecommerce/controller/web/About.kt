@@ -5,10 +5,9 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class Login {
-
-    @GetMapping("/login")
+class About {
+    @GetMapping("/sobre")
     fun home(model: Model): String {
-        return "views/login.html"
+        return "views/about.html"
     }
 }

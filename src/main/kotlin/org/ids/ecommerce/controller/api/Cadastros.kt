@@ -1,6 +1,5 @@
 package org.ids.ecommerce.controller.api
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.ids.ecommerce.dto.UsuarioReq
 import org.ids.ecommerce.dto.UsuarioRes
 import org.ids.ecommerce.service.CadastroService
@@ -18,9 +17,7 @@ class Cadastros {
     @GetMapping("/")
     fun getCadastros(): List<UsuarioRes> {
         var cadastros = cadastroService?.findAll()
-            ?: throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Lista de cadastros não pode ser obtida")
-
+            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Lista de cadastros não pôde ser obtida")
         return cadastros
     }
 
@@ -30,8 +27,7 @@ class Cadastros {
     @PostMapping
     fun criaCadastro(@RequestBody usuarioRequest: UsuarioReq): UsuarioRes =
         cadastroService?.criaCadastro(usuarioRequest)
-            ?: throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Cadastro não pode ser criado")
+            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Cadastro não pôde ser criado")
 
 
 }
