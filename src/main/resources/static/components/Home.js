@@ -3,22 +3,45 @@ new Vue({
     data: {
         accessToken: '',
         refreshToken: '',
-        nome: ''
+        nome: '',
+        foto: 'null'
     },
     mounted() {
-        // Retrieve items from sessionStorage
-        this.accessToken = sessionStorage.getItem('accessToken');
-        this.refreshToken = sessionStorage.getItem('refreshToken');
-        this.nome = sessionStorage.getItem('login');
+        // Pega os itens da localStorage
+        this.displayUserImage();
+        this.accessToken = localStorage.getItem('accessToken');
+        this.refreshToken = localStorage.getItem('refreshToken');
+        this.nome = localStorage.getItem('nome');
     },
     methods: {
         disconnect() {
-            sessionStorage.removeItem('accessToken');
-            sessionStorage.removeItem('refreshToken');
-            sessionStorage.removeItem('login');
+            // Limpa os itens da localStorage
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('login');
+            localStorage.removeItem('nome');
+            localStorage.removeItem('foto');
+
+            // Limpa os itens do Vue
             this.accessToken = '';
             this.refreshToken = '';
-            this.nome = '';
+            this.nome = ''; 
+            this.foto = 'null';
+
+            // Seta a foto placeholder
+            userImg = document.getElementById('display1');
+            userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
+        },
+        // Exibe a foto do usuário
+        displayUserImage() {
+            var userImg = document.getElementById('display1');
+            this.foto = localStorage.getItem('foto');
+            if (this.foto && this.foto !== 'null') {
+                userImg.src = 'data:image/png;base64,' + this.foto.replace(/"/g, '');;
+            }
+            else {
+                userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
+            }
         }
     }
 });

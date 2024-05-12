@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <!-- Vue.js CDN -->
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- CSS -->
+
     <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
-    <div id="app">
-        <div class="login-container">
-            <a href="../Home.html">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
-            </a>
-            <h2>Criar Conta</h2>
-            <input type="text" v-model="name" placeholder="Nome">
-            <input type="text" v-model="login" placeholder="Login">
-            <input type="password" v-model="password" placeholder="Senha">
-            <input type="password" v-model="confirmPassword" placeholder="Confirme a senha">
-            <button @click="signup">Criar</button>
-            <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
-    </footer>
-    
-    <script src="../components/signup.js"></script>
+<div id="app">
+    <div class="login-container">
+        <!-- Icone voltar -->
+        <a href="/" id="voltar">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home-Button">
+        </a>
+        <h2>Criar Conta</h2>
 
+        <!-- Caixas de input -->
+        <input type="text" v-model="name" placeholder="Nome" id="nome">
+        <input type="text" v-model="login" placeholder="Login" id="login">
+        <input type="password" v-model="password" placeholder="Senha" id="senha">
+        <input type="password" v-model="confirmPassword" placeholder="Confirmar senha" id="confirmar-senha">
+
+        <!-- Upload da imagem -->
+        <div class="file-upload-container">
+            <input type="file" accept="image/*" @change="handleFileUpload" ref="fileInput" style="display: none;">
+            <button @click="$refs.fileInput.click()">Foto de usuário</button>
+            <div v-if="imageName" class="image-container">
+                <p class="image-name">{{ imageName }}</p>
+            </div>
+        </div>
+
+        <!-- Botao criar conta -->
+        <button class="botao-estilo1" @click="signup">Criar</button>
+        <p v-if="errorMessage" class="error-message">Criação de conta falhou<br>{{ errorMessage }}</p>
+    </div>
+</div>
+<!-- Marca d'agua -->
+<footer>
+    <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
+</footer>
+
+<script src="../components/signup.js"></script>
 </body>
 </html>
