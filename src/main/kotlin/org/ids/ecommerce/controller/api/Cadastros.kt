@@ -14,11 +14,11 @@ class Cadastros {
     @Autowired
     var cadastroService: CadastroService? = null
 
-    @GetMapping
-    fun getUsuarios(): List<UsuarioRes> {
-        return cadastroService?.findAll()
-            ?: throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Lista de cadastros não pode ser obtida")
+    @GetMapping("/")
+    fun getCadastros(): List<UsuarioRes> {
+        var cadastros = cadastroService?.findAll()
+            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Lista de cadastros não pôde ser obtida")
+        return cadastros
     }
 
     @GetMapping("/{login}")
@@ -27,8 +27,7 @@ class Cadastros {
     @PostMapping
     fun criaCadastro(@RequestBody usuarioRequest: UsuarioReq): UsuarioRes =
         cadastroService?.criaCadastro(usuarioRequest)
-            ?: throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Cadastro não pode ser criado")
+            ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Cadastro não pôde ser criado")
 
 
 }

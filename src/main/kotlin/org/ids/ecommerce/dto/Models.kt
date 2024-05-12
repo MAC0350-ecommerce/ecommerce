@@ -1,7 +1,5 @@
 package org.ids.ecommerce.dto
 
-import org.ids.ecommerce.model.Papel
-
 data class UsuarioReq (var nome: String, var login: String, var senha: String, var foto: ByteArray?=null)
 
 data class UsuarioRes(var id: Int, var nome: String, var login: String, var foto: String, var papel: String)
