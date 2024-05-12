@@ -37,11 +37,13 @@ class SegurancaApi(
                     "/",
                     "/login",
                     "/sobre",
+                    "/signup",
                     "/components/*",
                     "/styles/*",
                     "/Home.html",
                     "/views/login.html",
-                    "/views/about.html"
+                    "/views/about.html",
+                    "/views/signup.html"
                 )
         }
     }
@@ -55,8 +57,9 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
-                    // TODO: Fechar o endpoint depois de configurar as migrations
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/cadastros")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/*")).permitAll()
                     .requestMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
             }
             .sessionManagement {

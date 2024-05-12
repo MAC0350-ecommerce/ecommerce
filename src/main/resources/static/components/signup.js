@@ -36,7 +36,7 @@ new Vue({
             axios.post('http://localhost:8080/api/cadastros', userData)
                 .then(response => {
                     alert('Conta criada com sucesso!');
-                    window.location.href = '/login';
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     this.errorMessage = error;
