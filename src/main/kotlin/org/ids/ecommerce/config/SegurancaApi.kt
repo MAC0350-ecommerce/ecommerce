@@ -57,8 +57,11 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
-                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/categorias/")).hasRole("ADMIN")
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/cadastros")).permitAll()
+                    // TODO: PERMITIR SOMENTE O PROPRIO USUARIO
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/*")).permitAll()
                     .requestMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
             }

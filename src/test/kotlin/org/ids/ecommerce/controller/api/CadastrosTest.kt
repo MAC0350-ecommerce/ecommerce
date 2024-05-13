@@ -39,7 +39,7 @@ class CadastrosTest {
 
     final var usuarioValidoReq = UsuarioReq("nome_teste", "login_teste", "senha_teste", byteArrayOf(1,2,3))
     final var usuarioValidoRes = UsuarioRes(1, usuarioValidoReq.nome, usuarioValidoReq.login, ObjectMapper().writeValueAsString(usuarioValidoReq.foto), Papel.USER.name)
-    final var listaCadastros = mutableListOf<UsuarioRes>(usuarioValidoRes, usuarioValidoRes, usuarioValidoRes)
+    final var listaCadastros = mutableListOf(usuarioValidoRes, usuarioValidoRes, usuarioValidoRes)
     final var listaVazia = mutableListOf<UsuarioRes>()
 
     @BeforeEach
