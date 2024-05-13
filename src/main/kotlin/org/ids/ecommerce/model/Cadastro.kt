@@ -13,7 +13,6 @@ class Cadastro (
     var login: String,
     var senha: String,
     val papel: Papel,
-
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "foto", nullable = true)
     var foto: Foto?=null
