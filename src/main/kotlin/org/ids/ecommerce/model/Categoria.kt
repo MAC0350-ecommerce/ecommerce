@@ -1,6 +1,10 @@
 package org.ids.ecommerce.model
 
 import jakarta.persistence.*
+import org.hibernate.annotations.GenerationTime
+import java.util.*
+
+import org.hibernate.annotations.Generated;
 
 @Entity
 class Categoria (
@@ -10,6 +14,9 @@ class Categoria (
     @Column(unique=true)
     var tag: String,
     var nome: String,
-    var dataCadastro: String,
-    var usuarioCadastro: Int
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    var dataCadastro: Date?,
+    var ativado: Boolean
 )
