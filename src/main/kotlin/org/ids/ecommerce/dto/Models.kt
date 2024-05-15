@@ -2,6 +2,9 @@ package org.ids.ecommerce.dto
 
 import org.ids.ecommerce.model.Foto
 
+data class ItemReq (var produto_id: Int, var codigo: String)
+data class ItemRes (val id: Int, var produto_id: Int, var codigo: String, var dataCadastro: String)
+
 data class ProdutoReq (var nome: String, var preco: Double?, var descricao: String?, var ativado: Boolean=false, var fotos: List<ByteArray>?=null)
 
 data class ProdutoRes (var id: Int, var nome: String, var preco: Double, var dataCadastro: String, var descricao: String, var ativado: Boolean, var fotos: List<Foto>?)

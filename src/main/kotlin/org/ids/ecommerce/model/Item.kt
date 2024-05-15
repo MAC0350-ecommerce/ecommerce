@@ -1,9 +1,9 @@
 package org.ids.ecommerce.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
+import org.hibernate.annotations.Generated
+import org.hibernate.annotations.GenerationTime
+import org.jetbrains.annotations.NotNull
 import java.util.*
 
 
@@ -12,7 +12,12 @@ class Item (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int?=null,
-    var dataCadastro: Date,
-    var produto: Int,
-    var usuarioCadastro: Int
+    @NotNull
+    var codigo : String,
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    var dataCadastro: Date?,
+    @NotNull
+    var produto_id: Int
 )

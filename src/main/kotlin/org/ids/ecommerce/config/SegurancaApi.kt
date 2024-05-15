@@ -57,6 +57,8 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/itens/")).hasRole("ADMIN")
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/itens/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/produtos/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/categorias/")).hasRole("ADMIN")
