@@ -65,6 +65,8 @@ class CategoriasTest {
             )
             return this
         }
+
+
         companion object {
             fun set(categoriaService: CategoriaService): Comportamento {
                 val comportamento = Comportamento()
