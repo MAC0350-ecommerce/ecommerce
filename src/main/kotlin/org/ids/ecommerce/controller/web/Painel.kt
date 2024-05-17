@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping
 class Painel {
     @GetMapping("/painel")
     fun painel(model: Model): String {
-        println("TESTE -------------")
         return "views/painel/painel.html"
     }
 }
