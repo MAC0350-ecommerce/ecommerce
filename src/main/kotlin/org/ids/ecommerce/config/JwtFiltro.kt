@@ -24,7 +24,13 @@ class JwtFiltro(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authHeader: String? = request.getHeader("Authorization")
+        var authHeader: String? = request.getHeader("Authorization")
+
+        val cookie: String? = request.getHeader("Cookie")
+
+        if (cookie != null && authHeader == null) {
+            authHeader = "Bearer " + request.getHeader("Cookie")
+        }
 
         if (authHeader.doesNotContainBearerToken()) {
             filterChain.doFilter(request, response)

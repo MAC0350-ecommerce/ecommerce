@@ -7,6 +7,7 @@ new Vue({
     },
     methods: {
         // Login
+        // TODO: PRECISA VALIDAR O TOKEN, CASO JA EXISTA NO LOCAL OU COOKIE
         access() {
             this.errorMessage = '';
             // Verifica se os campos estão preenchidos
@@ -31,6 +32,9 @@ new Vue({
                     localStorage.setItem('accessToken', response.data.accessToken);
                     localStorage.setItem('refreshToken', response.data.refreshToken);
 
+                    // Salva o token no cookie
+                    document.cookie = response.data.accessToken;
+
                     // Define headers
                     const accessToken = response.data.accessToken;
                     const headers = {
@@ -52,6 +56,6 @@ new Vue({
                             this.errorMessage = error;
                         });
                 });
-        }
+        },
     }
 });

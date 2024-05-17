@@ -57,8 +57,8 @@ class SegurancaApi(
             .authorizeHttpRequests {
                 it
                     /* Painel */
-                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel")).permitAll()
-                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel/*")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel")).hasRole("ADMIN")
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel/*")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/views/painel/*")).permitAll()
 
                     /* Login */
@@ -80,14 +80,12 @@ class SegurancaApi(
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            /*
             .formLogin{
                 it
                     .loginPage("/login")
                     .permitAll()
                     .defaultSuccessUrl("/")
             }
-             */
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter::class.java)
             .build()

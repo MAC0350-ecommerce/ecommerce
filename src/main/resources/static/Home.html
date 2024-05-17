@@ -18,7 +18,6 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/sobre">Sobre Nós</a></li>
-                        <li><a href="/login">Login</a></li>
                         <li v-if="!nome"><a href="/login" id="login-button">Login</a></li>
                         <li v-if="nome"><span v-if="nome" class="logout-btn" @click="disconnect">Desconectar</span>
                     </ul>

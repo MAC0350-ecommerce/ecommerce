@@ -22,6 +22,9 @@ new Vue({
             localStorage.removeItem('nome');
             localStorage.removeItem('foto');
 
+            // Limpa os cookies
+            document.cookie = ""
+
             // Limpa os itens do Vue
             this.accessToken = '';
             this.refreshToken = '';
