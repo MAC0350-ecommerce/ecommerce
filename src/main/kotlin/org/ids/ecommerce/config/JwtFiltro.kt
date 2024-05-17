@@ -28,23 +28,9 @@ class JwtFiltro(
 
         val cookie: String? = request.getHeader("Cookie")
 
-        println(authHeader)
-        println(cookie)
-
-        println(cookie == null)
-        println(cookie == "null")
-        println(cookie != null)
-
-        println(authHeader == null)
-        println(authHeader != null)
-        println(authHeader == "null")
-
         if (cookie != null && authHeader == null) {
-            println("loop")
             authHeader = "Bearer " + request.getHeader("Cookie")
         }
-
-        println(authHeader)
 
         if (authHeader.doesNotContainBearerToken()) {
             filterChain.doFilter(request, response)
