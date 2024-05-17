@@ -35,7 +35,6 @@ class SegurancaApi(
             web.ignoring()
                 .requestMatchers(
                     "/",
-                    "/login",
                     "/sobre",
                     "/signup",
                     "/components/*",
@@ -57,6 +56,15 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
+                    /* Painel */
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/painel/*")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/views/painel/*")).permitAll()
+
+                    /* Login */
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/login")).permitAll()
+
+
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/itens/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/itens/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/")).permitAll()
@@ -72,6 +80,14 @@ class SegurancaApi(
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
+            /*
+            .formLogin{
+                it
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/")
+            }
+             */
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter::class.java)
             .build()
