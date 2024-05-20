@@ -44,4 +44,13 @@ class FotoRepositoryTest {
         var fotoBanco = fotoRepository.findById(fotoSalva.id!!).get()
         assertArrayEquals(novaFoto.foto, fotoBanco.foto)
     }
+
+    @Test
+    fun salvaFotoSemSucesso() {
+        var novaFoto = Foto(id = null, foto = byteArrayOf())
+        var fotoSalva = fotoRepository.save(novaFoto)
+        assertNull(fotoSalva)
+    }
+
+
 }
