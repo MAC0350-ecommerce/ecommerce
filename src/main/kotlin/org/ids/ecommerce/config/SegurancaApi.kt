@@ -80,12 +80,14 @@ class SegurancaApi(
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
+            /*
             .formLogin{
                 it
                     .loginPage("/login")
                     .permitAll()
                     .defaultSuccessUrl("/")
             }
+            */
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter::class.java)
             .build()
