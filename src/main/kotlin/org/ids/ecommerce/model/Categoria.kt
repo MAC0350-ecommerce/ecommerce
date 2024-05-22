@@ -1,16 +1,20 @@
 package org.ids.ecommerce.model
 
 import jakarta.persistence.*
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.Pattern
+import org.hibernate.annotations.Generated
 import org.hibernate.annotations.GenerationTime
+import org.jetbrains.annotations.NotNull
 import java.util.*
-
-import org.hibernate.annotations.Generated;
 
 @Entity
 class Categoria (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int?=null,
+    @field:NotBlank(message = "Tag não pode estar em branco")
     @Column(unique=true, nullable = false)
     var tag: String,
     var nome: String,
