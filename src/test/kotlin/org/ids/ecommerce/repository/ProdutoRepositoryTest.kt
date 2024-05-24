@@ -3,6 +3,7 @@ package org.ids.ecommerce.repository
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Produto
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,6 +19,7 @@ class ProdutoRepositoryTest {
     lateinit var fotoRepository: FotoRepository
 
     @Test
+    @Order(1)
     fun salvaProdutoComSucesso() {
         var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
             fotos = listOf(Foto(null, byteArrayOf(1,2,3)), Foto(null, byteArrayOf(1,2,3)))
@@ -38,6 +40,7 @@ class ProdutoRepositoryTest {
     }
 
     @Test
+    @Order(2)
     fun salvaFotoSemSucesso() {
         // Lista de fotos vazia
         var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
