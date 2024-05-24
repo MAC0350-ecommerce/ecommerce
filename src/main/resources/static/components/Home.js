@@ -4,6 +4,7 @@ new Vue({
         accessToken: '',
         refreshToken: '',
         nome: '',
+        papel: '',
         foto: 'null'
     },
     mounted() {
@@ -12,6 +13,7 @@ new Vue({
         this.accessToken = localStorage.getItem('accessToken');
         this.refreshToken = localStorage.getItem('refreshToken');
         this.nome = localStorage.getItem('nome');
+        this.papel = localStorage.getItem('papel');
     },
     methods: {
         disconnect() {
@@ -21,6 +23,7 @@ new Vue({
             localStorage.removeItem('login');
             localStorage.removeItem('nome');
             localStorage.removeItem('foto');
+            localStorage.removeItem('papel');
 
             // Limpa os cookies
             document.cookie = ""
@@ -29,11 +32,15 @@ new Vue({
             this.accessToken = '';
             this.refreshToken = '';
             this.nome = ''; 
+            this.papel = '';
             this.foto = 'null';
 
             // Seta a foto placeholder
             userImg = document.getElementById('display1');
             userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
+
+            // Refresh na pagina
+            location.reload();
         },
         // Exibe a foto do usuário
         displayUserImage() {

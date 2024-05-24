@@ -10,4 +10,4 @@ class PainelItens {
     fun painelItens(model: Model): String {
         return "/views/painel/itens.html"
     }
-}
+}   
