@@ -19,7 +19,6 @@ class ProdutoRepositoryTest {
     lateinit var fotoRepository: FotoRepository
 
     @Test
-    @Order(1)
     fun salvaProdutoComSucesso() {
         var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
             fotos = listOf(Foto(null, byteArrayOf(1,2,3)), Foto(null, byteArrayOf(1,2,3)))
@@ -34,13 +33,12 @@ class ProdutoRepositoryTest {
         var fotoSalva2 = fotoRepository.findById(produtoBanco.fotos.get(1).id!!).get()
         assertNotNull(fotoSalva1)
         assertNotNull(fotoSalva2)
-        assertEquals(fotoSalva1.foto, produtoNovo.fotos.get(0).foto)
-        assertEquals(fotoSalva2.foto, produtoNovo.fotos.get(1).foto)
+        assertArrayEquals(fotoSalva1.foto, produtoNovo.fotos.get(0).foto)
+        assertArrayEquals(fotoSalva2.foto, produtoNovo.fotos.get(1).foto)
         assertNotEquals(fotoSalva1.id, fotoSalva2.id)
     }
 
     @Test
-    @Order(2)
     fun salvaFotoSemSucesso() {
         // Lista de fotos vazia
         var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
