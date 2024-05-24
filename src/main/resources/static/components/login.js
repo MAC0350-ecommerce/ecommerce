@@ -17,13 +17,13 @@ new Vue({
             }
 
             // Organiza os dados do usuário
-            const userData = {
+            const data = {
                 login: this.login,
                 senha: this.password
             };
 
             // POST request
-            axios.post('http://localhost:8080/api/auth/login', userData)
+            axios.post('http://localhost:8080/api/auth/login', data)
                 .catch(error => {
                     this.errorMessage = 'Usuário ou Senha incorretos';
                 })

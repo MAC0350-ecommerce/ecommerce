@@ -42,20 +42,30 @@
 
     <div class="about-container">
         <div id="app" class="container table-container">
-            <h1>Dados da Tabela</h1>
+            <p>{{ xxx }}</p>
             <div class="loading" id="loading">Carregando dados...</div>
+            <h2>Itens</h2>
             <table class="table table-striped d-none" id="data-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Login</th>
-                        <th>Foto</th>
+                        <th>ID do Produto</th>
+                        <th>Código</th>
+                        <th>Data de Cadastro</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <!--  -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" v-model="new_pid" id="new-prod-id" placeholder="ID do Produto"></td>
+                        <td><input type="text" v-model="new_codigo" id="new-code" placeholder="Código"></td>
+                        <td class="button-cell" colspan="2"><button type="button" @click="addNewItem" id="add-button">Adicionar</button></td>                </tfoot>
             </table>
         </div>
     </div>
+    
 
 <script src="../../components/itens.js"></script>
 </body>
