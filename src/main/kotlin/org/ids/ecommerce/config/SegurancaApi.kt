@@ -56,6 +56,9 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
+                    /* Recursos */
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/img/*")).permitAll()
+
                     /* Painel */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/painel")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/painel/*")).hasRole("ADMIN")
@@ -87,7 +90,7 @@ class SegurancaApi(
                     .permitAll()
                     .defaultSuccessUrl("/")
             }
-            */
+             */
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter::class.java)
             .build()

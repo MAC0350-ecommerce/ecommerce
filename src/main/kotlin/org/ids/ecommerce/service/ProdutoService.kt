@@ -4,12 +4,14 @@ import org.ids.ecommerce.dto.ProdutoReq
 import org.ids.ecommerce.dto.ProdutoRes
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Produto
+import org.ids.ecommerce.repository.FotoRepository
 import org.ids.ecommerce.repository.ProdutoRepository
 import org.springframework.stereotype.Service
 
 @Service
 class ProdutoService (
-    private var produtoRepository: ProdutoRepository
+    private var produtoRepository: ProdutoRepository,
+    private var fotoRepository: FotoRepository
 ){
     fun findAll() : List<ProdutoRes> {
         var lista = produtoRepository.findAll().toList()
@@ -37,13 +39,18 @@ class ProdutoService (
     fun criaProduto(produtoReq: ProdutoReq) : ProdutoRes {
         val fotos : List<Foto> = ArrayList()
         produtoReq.fotos?.forEach{ x ->
-            var foto =
+            val foto =
                 Foto(
                     id = null,
                     foto = x
                 )
             fotos.addFirst(foto)
         }
+
+        if (fotos.isEmpty()) {
+            fotos.addFirst(fotoRepository.findById(2).get())
+        }
+
         val produtoSalvo = produtoRepository.save(
             Produto(
                 id = null,
