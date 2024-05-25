@@ -3,6 +3,7 @@ package org.ids.ecommerce.repository
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Produto
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -32,8 +33,8 @@ class ProdutoRepositoryTest {
         var fotoSalva2 = fotoRepository.findById(produtoBanco.fotos.get(1).id!!).get()
         assertNotNull(fotoSalva1)
         assertNotNull(fotoSalva2)
-        assertEquals(fotoSalva1.foto, produtoNovo.fotos.get(0).foto)
-        assertEquals(fotoSalva2.foto, produtoNovo.fotos.get(1).foto)
+        assertArrayEquals(fotoSalva1.foto, produtoNovo.fotos.get(0).foto)
+        assertArrayEquals(fotoSalva2.foto, produtoNovo.fotos.get(1).foto)
         assertNotEquals(fotoSalva1.id, fotoSalva2.id)
     }
 

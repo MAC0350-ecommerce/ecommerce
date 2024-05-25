@@ -7,12 +7,14 @@ import org.ids.ecommerce.model.Cadastro
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Papel
 import org.ids.ecommerce.repository.CadastroRepository
+import org.ids.ecommerce.repository.FotoRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class CadastroService (
     private var cadastroRepository: CadastroRepository,
+    private var fotoRepository: FotoRepository,
     private val encoder: PasswordEncoder
 ){
     fun criaCadastro (novoUsuario: UsuarioReq): UsuarioRes? {
@@ -27,7 +29,7 @@ class CadastroService (
                 login = novoUsuario.login,
                 senha = encoder.encode(novoUsuario.senha),
                 papel = Papel.USER,
-                foto = novoUsuario.foto?.let { Foto(id = null, foto = it) }
+                foto = if (novoUsuario.foto != null) Foto(id = null, foto = novoUsuario.foto!!) else fotoRepository.findById(1).get()
             )
         )
         return UsuarioRes (
