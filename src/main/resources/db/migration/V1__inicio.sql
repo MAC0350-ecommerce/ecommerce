@@ -11,7 +11,7 @@ CREATE TABLE usuario (
     nome varchar(255),
     papel tinyint default 0,
     senha varchar(255),
-    foto int,
+    foto int NOT NULL DEFAULT 1,
     CONSTRAINT usuario_pkey PRIMARY KEY (id)
 );
 

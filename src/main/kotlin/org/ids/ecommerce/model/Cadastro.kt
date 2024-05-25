@@ -18,8 +18,8 @@ class Cadastro (
     var senha: String,
     val papel: Papel,
     @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "foto", nullable = true)
-    var foto: Foto?=null
+    @JoinColumn(name = "foto", nullable = false)
+    var foto: Foto
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -38,8 +38,7 @@ class Cadastro (
         result = 31 * result + login.hashCode()
         result = 31 * result + senha.hashCode()
         result = 31 * result + papel.hashCode()
-        result = 31 * result + (foto?.hashCode()
-            ?: 0)
+        result = 31 * result + foto.hashCode()
         return result
     }
 }
