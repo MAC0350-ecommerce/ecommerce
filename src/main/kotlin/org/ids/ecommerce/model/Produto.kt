@@ -24,7 +24,7 @@ class Produto (
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var dataCadastro: Date?,
     @field:NotEmpty(message = "Lista de fotos não pode ser vazia")
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var fotos : List<Foto>
 ) {
     override fun equals(other: Any?): Boolean {
