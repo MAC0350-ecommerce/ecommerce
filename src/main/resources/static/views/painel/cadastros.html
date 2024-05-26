@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Store</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../../styles/painel.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
@@ -43,8 +43,6 @@
     <div class="about-container">
         <div id="app" class="container table-container">
             <h2>Cadastros</h2>
-            <p>{{ xxx }}</p>
-            <div class="loading" id="loading">Carregando dados...</div>
             
             <!-- Tabela adicionar produtos -->
             <table class="table" id="add-product-table">
@@ -52,7 +50,7 @@
                     <tr>
                         <td><input type="text" v-model="new_nome" id="new_nome" placeholder="Nome"></td>
                         <td><input type="text" v-model="new_login" id="new_login" placeholder="Login"></td>
-                        <td><input type="text" v-model="new_senha" id="new_senha" placeholder="Descrição"></td>
+                        <td><input type="text" v-model="new_senha" id="new_senha" placeholder="Senha"></td>
                         <td>
                             <input type="file" accept="image/*" multiple @change="handleFileUpload" ref="fileInput" style="display: none;">
                             <button type="button" @click="$refs.fileInput.click()">Fotos</button>
@@ -62,6 +60,8 @@
                 </tbody>
             </table>
             
+            <div class="loading" id="loading">Carregando dados...</div>
+
             <!-- Tabela listagem de Usuarios -->
             <table class="table table-striped d-none" id="data-table">
                 <thead>

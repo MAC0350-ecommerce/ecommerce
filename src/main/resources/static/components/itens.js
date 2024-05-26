@@ -1,9 +1,28 @@
+function waitForElementToExist(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            subtree: true,
+            childList: true,
+        });
+    });
+}
+
 new Vue({
     el: '#app',
     data: {
-        // xxx: "a",
-        new_pid: "",
-        new_codigo: ""
+        new_pid: '',
+        new_codigo: ''
     },
     mounted() {
         // Pega o token
@@ -11,44 +30,46 @@ new Vue({
         const headers = {
             Authorization: 'Bearer ' + accessToken
         };
-        
-        // this.xxx = accessToken;
+
         // GET request
-        axios.get('http://localhost:8080/api/itens/', { headers })
-            .then(response => {
-                const data = response.data;
-                const tableBody = document.querySelector('#data-table tbody');
-                const table = document.querySelector('#data-table');
-                const loading = document.querySelector('#loading');
+        waitForElementToExist('#loading').then(loading => {
+            axios.get('http://localhost:8080/api/itens/', { headers })
+                .then(response => {
+                    const data = response.data;
+                    const table = document.querySelector('#data-table');
+                    const tableBody = document.querySelector('#data-table tbody');
 
-                // Adiciona as linhas na tabela
-                data.forEach(row => {
-                    const tr = document.createElement('tr');
+                    // Adiciona as linhas na tabela
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
 
-                    // ID
-                    const idCell = document.createElement('td');
-                    idCell.textContent = row.id;
-                    tr.appendChild(idCell);
+                        // ID
+                        const idCell = document.createElement('td');
+                        idCell.textContent = row.id;
+                        tr.appendChild(idCell);
 
-                    // ID do Produto
-                    const pidCell = document.createElement('td');
-                    pidCell.textContent = row.produto_id;
-                    tr.appendChild(pidCell);
+                        // ID do Produto
+                        const pidCell = document.createElement('td');
+                        pidCell.textContent = row.produto_id;
+                        tr.appendChild(pidCell);
 
-                    // Codigo
-                    const codigoCell = document.createElement('td');
-                    codigoCell.textContent = row.codigo;
-                    tr.appendChild(codigoCell);
+                        // Codigo
+                        const codigoCell = document.createElement('td');
+                        codigoCell.textContent = row.codigo;
+                        tr.appendChild(codigoCell);
 
-                    // Data de Cadastro
-                    const dataCell = document.createElement('td');
-                    dataCell.textContent = row.dataCadastro;
-                    tr.appendChild(dataCell);
+                        // Data de Cadastro
+                        const dataCell = document.createElement('td');
+                        dataCell.textContent = row.dataCadastro;
+                        tr.appendChild(dataCell);
 
-                    tableBody.appendChild(tr);
+                        tableBody.appendChild(tr);
+                    });
+
+                    // Hide loading text and show the table
+                    loading.classList.add('d-none');
+                    table.classList.remove('d-none');
                 });
-                loading.classList.add('d-none'); // Esconde o texto de carregamento
-                table.classList.remove('d-none'); // Mostra a tabela
             })
             .catch(error => {
                 console.error(error);

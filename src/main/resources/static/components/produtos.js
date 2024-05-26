@@ -1,3 +1,23 @@
+function waitForElementToExist(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            subtree: true,
+            childList: true,
+        });
+    });
+}
+
 new Vue({
     el: '#app',
     data: {
@@ -15,113 +35,114 @@ new Vue({
             Authorization: 'Bearer ' + accessToken
         };
         
-        // GET request
-        axios.get('http://localhost:8080/api/produtos/', { headers })
-            .then(response => {
-                const data = response.data;
-                const tableBody = document.querySelector('#data-table tbody');
-                const table = document.querySelector('#data-table');
-                const loading = document.querySelector('#loading');
+        waitForElementToExist('#loading').then(loading => {
+            // GET request
+            axios.get('http://localhost:8080/api/produtos/', { headers })
+                .then(response => {
+                    const data = response.data;
+                    const tableBody = document.querySelector('#data-table tbody');
+                    const table = document.querySelector('#data-table');
 
-                // Adiciona as linhas na tabela
-                data.forEach(row => {
-                    const tr = document.createElement('tr');
+                    // Adiciona as linhas na tabela
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
 
-                    // ID
-                    const idCell = document.createElement('td');
-                    idCell.textContent = row.id;
-                    tr.appendChild(idCell);
+                        // ID
+                        const idCell = document.createElement('td');
+                        idCell.textContent = row.id;
+                        tr.appendChild(idCell);
 
-                    // Nome
-                    const nomeCell = document.createElement('td');
-                    nomeCell.textContent = row.nome;
-                    tr.appendChild(nomeCell);
+                        // Nome
+                        const nomeCell = document.createElement('td');
+                        nomeCell.textContent = row.nome;
+                        tr.appendChild(nomeCell);
 
-                    // Preco
-                    const precoCell = document.createElement('td');
-                    precoCell.textContent = row.preco;
-                    tr.appendChild(precoCell);
+                        // Preco
+                        const precoCell = document.createElement('td');
+                        precoCell.textContent = row.preco;
+                        tr.appendChild(precoCell);
 
-                    // Data de Cadastro
-                    const dataCell = document.createElement('td');
-                    dataCell.textContent = row.dataCadastro;
-                    tr.appendChild(dataCell);
+                        // Data de Cadastro
+                        const dataCell = document.createElement('td');
+                        dataCell.textContent = row.dataCadastro;
+                        tr.appendChild(dataCell);
 
-                    // Descricao
-                    const descricaoCell = document.createElement('td');
-                    descricaoCell.textContent = row.descricao;
-                    tr.appendChild(descricaoCell);
+                        // Descricao
+                        const descricaoCell = document.createElement('td');
+                        descricaoCell.textContent = row.descricao;
+                        tr.appendChild(descricaoCell);
 
-                    // Ativado
-                    const ativadoCell = document.createElement('td');
-                    ativadoCell.textContent = row.ativado ? 'Sim' : 'Não';
-                    tr.appendChild(ativadoCell)
+                        // Ativado
+                        const ativadoCell = document.createElement('td');
+                        ativadoCell.textContent = row.ativado ? 'Sim' : 'Não';
+                        tr.appendChild(ativadoCell)
 
-                    // Fotos Carousel
-                    const fotosCell = document.createElement('td');
-                    const carouselDiv = document.createElement('div');
-                    carouselDiv.id = 'carouselExampleControls' + row.id; 
-                    carouselDiv.className = 'carousel slide';
-                    carouselDiv.setAttribute('data-ride', 'carousel');
-                    const innerDiv = document.createElement('div');
-                    innerDiv.className = 'carousel-inner';
+                        // Fotos Carousel
+                        const fotosCell = document.createElement('td');
+                        const carouselDiv = document.createElement('div');
+                        carouselDiv.id = 'carouselExampleControls' + row.id; 
+                        carouselDiv.className = 'carousel slide';
+                        carouselDiv.setAttribute('data-ride', 'carousel');
+                        const innerDiv = document.createElement('div');
+                        innerDiv.className = 'carousel-inner';
 
-                    // Adiciona as fotos no carousel
-                    for (let i = 0; i < row.fotos.length; i++) {
-                        const foto = row.fotos[i].foto;
-                        const carouselItem = document.createElement('div');
-                        carouselItem.className = 'carousel-item' + (i === 0 ? ' active' : ''); // Set first item as active
-                        const img = document.createElement('img');
-                        img.src = 'data:image/png;base64,' + foto.replace(/"/g, '');
-                        img.style.border = '1px solid #000';
-                        img.style.width = '80px';
-                        img.style.height = '80px';
+                        // Adiciona as fotos no carousel
+                        for (let i = 0; i < row.fotos.length; i++) {
+                            const foto = row.fotos[i].foto;
+                            const carouselItem = document.createElement('div');
+                            carouselItem.className = 'carousel-item' + (i === 0 ? ' active' : ''); // Set first item as active
+                            const img = document.createElement('img');
+                            img.src = 'data:image/png;base64,' + foto.replace(/"/g, '');
+                            img.style.border = '1px solid #000';
+                            img.style.width = '80px';
+                            img.style.height = '80px';
 
-                        carouselItem.appendChild(img);
-                        innerDiv.appendChild(carouselItem);
-                    }
+                            carouselItem.appendChild(img);
+                            innerDiv.appendChild(carouselItem);
+                        }
 
-                    if (row.fotos.length > 1) {
-                        // Previous button
-                        const prevControl = document.createElement('a');
-                        prevControl.className = 'carousel-control-prev';
-                        prevControl.href = '#carouselExampleControls' + row.id;
-                        prevControl.setAttribute('role', 'button');
-                        prevControl.setAttribute('data-slide', 'prev');
-                        prevControl.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only"> < </span>';
-                        prevControl.style.color = 'black';
-                        prevControl.style.textDecoration = 'none';
-                        prevControl.style.fontSize = '1.5rem';
-                        prevControl.style.opacity = '1';
-                        
-                        // Next button
-                        const nextControl = document.createElement('a');
-                        nextControl.className = 'carousel-control-next';
-                        nextControl.href = '#carouselExampleControls' + row.id;
-                        nextControl.setAttribute('role', 'button');
-                        nextControl.setAttribute('data-slide', 'next');
-                        nextControl.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only"> > </span>';
-                        nextControl.style.color = 'black';
-                        nextControl.style.textDecoration = 'none';
-                        nextControl.style.fontSize = '1.5rem';
-                        nextControl.style.opacity = '1';
+                        if (row.fotos.length > 1) {
+                            // Previous button
+                            const prevControl = document.createElement('a');
+                            prevControl.className = 'carousel-control-prev';
+                            prevControl.href = '#carouselExampleControls' + row.id;
+                            prevControl.setAttribute('role', 'button');
+                            prevControl.setAttribute('data-slide', 'prev');
+                            prevControl.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only"> < </span>';
+                            prevControl.style.color = 'black';
+                            prevControl.style.textDecoration = 'none';
+                            prevControl.style.fontSize = '1.5rem';
+                            prevControl.style.opacity = '1';
+                            
+                            // Next button
+                            const nextControl = document.createElement('a');
+                            nextControl.className = 'carousel-control-next';
+                            nextControl.href = '#carouselExampleControls' + row.id;
+                            nextControl.setAttribute('role', 'button');
+                            nextControl.setAttribute('data-slide', 'next');
+                            nextControl.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only"> > </span>';
+                            nextControl.style.color = 'black';
+                            nextControl.style.textDecoration = 'none';
+                            nextControl.style.fontSize = '1.5rem';
+                            nextControl.style.opacity = '1';
 
-                        // Adiciona os elementos do carousel na pagina
-                        carouselDiv.appendChild(prevControl);
-                        carouselDiv.appendChild(nextControl);
-                    }
-                    carouselDiv.appendChild(innerDiv);
-                    fotosCell.appendChild(carouselDiv);
-                    tr.appendChild(fotosCell);
+                            // Adiciona os elementos do carousel na pagina
+                            carouselDiv.appendChild(prevControl);
+                            carouselDiv.appendChild(nextControl);
+                        }
+                        carouselDiv.appendChild(innerDiv);
+                        fotosCell.appendChild(carouselDiv);
+                        tr.appendChild(fotosCell);
 
-                    tableBody.appendChild(tr);
+                        tableBody.appendChild(tr);
+                    });
+                    loading.classList.add('d-none'); // Esconde o texto de carregamento
+                    table.classList.remove('d-none'); // Mostra a tabela
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert(error);
                 });
-                loading.classList.add('d-none'); // Esconde o texto de carregamento
-                table.classList.remove('d-none'); // Mostra a tabela
-            })
-            .catch(error => {
-                console.error(error);
-                alert(error);
             });
     },
     methods: {

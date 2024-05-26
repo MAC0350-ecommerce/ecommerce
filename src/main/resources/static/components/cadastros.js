@@ -1,11 +1,30 @@
+function waitForElementToExist(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            subtree: true,
+            childList: true,
+        });
+    });
+}
+
 new Vue({
     el: '#app',
     data: {
         new_nome: '',
         new_login: '',
         new_senha: '',
-        imageBytes: null,
-        xxx: ''
+        imageBytes: null
     },
     mounted() {
         // Pega o token
@@ -13,58 +32,59 @@ new Vue({
         const headers = {
             Authorization: 'Bearer ' + accessToken
         };
-        this.xxx = accessToken;
-        // GET request
-        axios.get('http://localhost:8080/api/cadastros/', { headers })
-            .then(response => {
-                const data = response.data;
-                const tableBody = document.querySelector('#data-table tbody');
-                const table = document.querySelector('#data-table');
-                const loading = document.querySelector('#loading');
 
-                // Adiciona as linhas na tabela
-                data.forEach(row => {
-                    const tr = document.createElement('tr');
+        waitForElementToExist('#loading').then(loading => {
+            // GET request
+            axios.get('http://localhost:8080/api/cadastros/', { headers })
+                .then(response => {
+                    const data = response.data;
+                    const tableBody = document.querySelector('#data-table tbody');
+                    const table = document.querySelector('#data-table');
 
-                    // ID
-                    const idCell = document.createElement('td');
-                    idCell.textContent = row.id;
-                    tr.appendChild(idCell);
+                    // Adiciona as linhas na tabela
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
 
-                    // Nome
-                    const nameCell = document.createElement('td');
-                    nameCell.textContent = row.nome;
-                    tr.appendChild(nameCell);
+                        // ID
+                        const idCell = document.createElement('td');
+                        idCell.textContent = row.id;
+                        tr.appendChild(idCell);
 
-                    // Login
-                    const loginCell = document.createElement('td');
-                    loginCell.textContent = row.login;
-                    tr.appendChild(loginCell);
+                        // Nome
+                        const nameCell = document.createElement('td');
+                        nameCell.textContent = row.nome;
+                        tr.appendChild(nameCell);
 
-                    // Papel
-                    const papelCell = document.createElement('td');
-                    papelCell.textContent = row.papel;
-                    tr.appendChild(papelCell);
-                    
-                    // Foto
-                    const fotoCell = document.createElement('td');
-                    const fotoImg = document.createElement('img');
-                    fotoImg.src = 'data:image/png;base64,' + row.foto.replace(/"/g, '');
-                    fotoImg.style.width = '40px'; 
-                    fotoImg.style.height = '40px';
-                    fotoImg.style.border = '1px solid #000';
-                    fotoCell.appendChild(fotoImg);
-                    tr.appendChild(fotoCell);
+                        // Login
+                        const loginCell = document.createElement('td');
+                        loginCell.textContent = row.login;
+                        tr.appendChild(loginCell);
 
-                    tableBody.appendChild(tr);
+                        // Papel
+                        const papelCell = document.createElement('td');
+                        papelCell.textContent = row.papel;
+                        tr.appendChild(papelCell);
+                        
+                        // Foto
+                        const fotoCell = document.createElement('td');
+                        const fotoImg = document.createElement('img');
+                        fotoImg.src = 'data:image/png;base64,' + row.foto.replace(/"/g, '');
+                        fotoImg.style.width = '40px'; 
+                        fotoImg.style.height = '40px';
+                        fotoImg.style.border = '1px solid #000';
+                        fotoCell.appendChild(fotoImg);
+                        tr.appendChild(fotoCell);
+
+                        tableBody.appendChild(tr);
+                    });
+                    loading.classList.add('d-none'); // Esconde o texto de carregamento
+                    table.classList.remove('d-none'); // Mostra a tabela
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Não foi possível carregar os dados :(");
                 });
-                loading.classList.add('d-none'); // Esconde o texto de carregamento
-                table.classList.remove('d-none'); // Mostra a tabela
-            })
-            .catch(error => {
-                console.error(error);
-                alert("Não foi possível carregar os dados :(");
-            });
+        });
     },
     methods: {
         addNewItem() {
@@ -76,13 +96,13 @@ new Vue({
             // Organiza os dados
             const data = {
                 nome: this.new_nome,
-                preco: this.new_login,
-                descricao: this.new_senha,
-                fotos: this.imageBytes
+                login: this.new_login,
+                senha: this.new_senha,
+                foto: this.imageBytes
             };
 
             // POST request
-            axios.post('http://localhost:8080/api/cadastros/', data)
+            axios.post('http://localhost:8080/api/cadastros', data)
                 .then(response => {
                     alert("Usuário adicionado com sucesso!");
                     window.location.reload();
