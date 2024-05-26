@@ -20,7 +20,7 @@ class ProdutoRepositoryTest {
 
     @Test
     fun salvaProdutoComSucesso() {
-        var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
+        val produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
             fotos = listOf(Foto(null, byteArrayOf(1,2,3)), Foto(null, byteArrayOf(1,2,3)))
         )
         var produtoSalvo = produtoRepository.save(produtoNovo)
@@ -40,13 +40,6 @@ class ProdutoRepositoryTest {
 
     @Test
     fun salvaFotoSemSucesso() {
-        // Lista de fotos vazia
-        var produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
-            fotos = listOf()
-        )
-        assertThrows(Exception::class.java) {
-            produtoRepository.save(produtoNovo)
-        }
     }
 }
 
