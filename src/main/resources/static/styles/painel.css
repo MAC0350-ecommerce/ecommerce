@@ -64,8 +64,8 @@ nav ul li a {
     height: 400px; 
 }
 
-button {
-    height: 40px; 
+.button-estilo {
+    height: 30px; 
     padding: 5px 10px; 
     background-color: #007bff;
     color: white;
@@ -75,6 +75,7 @@ button {
     margin-right: 0;
 }
 
+
 .button-cell {
     text-align: right;
 }
@@ -83,7 +84,7 @@ button {
     width: auto; 
 }
 
-button:hover {
+.button-estilo:hover {
     background-color: #0056b3;
 }
 
@@ -99,4 +100,18 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.carousel-item {
+    transition: opacity 0.7s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+}
 
+.carousel-item.active {
+    opacity: 1;
+    position: relative;
+}
+
+.fixed-width-column {
+    width: 80px;
+}

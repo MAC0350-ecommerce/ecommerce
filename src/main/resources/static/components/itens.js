@@ -1,7 +1,7 @@
 new Vue({
     el: '#app',
     data: {
-        xxx: "a",
+        // xxx: "a",
         new_pid: "",
         new_codigo: ""
     },
@@ -12,13 +12,9 @@ new Vue({
             Authorization: 'Bearer ' + accessToken
         };
         
-        this.xxx = accessToken;
+        // this.xxx = accessToken;
         // GET request
         axios.get('http://localhost:8080/api/itens/', { headers })
-            .catch(error => {
-                console.error(error);
-                alert("Não foi possível carregar os dados :(");
-            })
             .then(response => {
                 const data = response.data;
                 const tableBody = document.querySelector('#data-table tbody');
@@ -53,6 +49,10 @@ new Vue({
                 });
                 loading.classList.add('d-none'); // Esconde o texto de carregamento
                 table.classList.remove('d-none'); // Mostra a tabela
+            })
+            .catch(error => {
+                console.error(error);
+                alert(error);
             });
     },
     methods: {
@@ -70,13 +70,13 @@ new Vue({
             
             // POST request
             axios.post('http://localhost:8080/api/itens/', data)
-                .catch(error => {
-                    console.error(error);
-                    alert("Não foi possível adicionar o item :(");
-                })
                 .then(response => {
                     alert("Item adicionado com sucesso!");
                     window.location.reload();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Não foi possível adicionar o item :(");
                 });
         }
     }

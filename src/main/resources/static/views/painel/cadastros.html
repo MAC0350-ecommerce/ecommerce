@@ -43,19 +43,38 @@
     <div class="about-container">
         <div id="app" class="container table-container">
             <h2>Cadastros</h2>
+            <p>{{ xxx }}</p>
             <div class="loading" id="loading">Carregando dados...</div>
+            
+            <!-- Tabela adicionar produtos -->
+            <table class="table" id="add-product-table">
+                <tbody>
+                    <tr>
+                        <td><input type="text" v-model="new_nome" id="new_nome" placeholder="Nome"></td>
+                        <td><input type="text" v-model="new_login" id="new_login" placeholder="Login"></td>
+                        <td><input type="text" v-model="new_senha" id="new_senha" placeholder="Descrição"></td>
+                        <td>
+                            <input type="file" accept="image/*" multiple @change="handleFileUpload" ref="fileInput" style="display: none;">
+                            <button type="button" @click="$refs.fileInput.click()">Fotos</button>
+                        </td>
+                        <td class="button-cell"><button type="button" class="button-estilo" @click="addNewItem" id="add-button">Adicionar</button></td>                
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Tabela listagem de Usuarios -->
             <table class="table table-striped d-none" id="data-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Login</th>
-                        <th>Foto</th>
                         <th>Papel</th>
+                        <th>Foto</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- -->
+                    <!-- dados sao inseridos dinamicamente -->
                 </tbody>
             </table>
         </div>

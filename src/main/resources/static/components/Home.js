@@ -37,7 +37,7 @@ new Vue({
 
             // Seta a foto placeholder
             userImg = document.getElementById('display1');
-            userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
+            userImg.src = '../img/usuario_padrao.png';
 
             // Refresh na pagina
             location.reload();
@@ -47,10 +47,10 @@ new Vue({
             var userImg = document.getElementById('display1');
             this.foto = localStorage.getItem('foto');
             if (this.foto && this.foto !== 'null') {
-                userImg.src = 'data:image/png;base64,' + this.foto.replace(/"/g, '');;
+                userImg.src = 'data:image/png;base64,' + this.foto.replace(/"/g, '');
             }
             else {
-                userImg.src = 'https://ennhri.org/wp-content/uploads/2023/01/Portrait-placeholder.png';
+                userImg.src = '../img/usuario_padrao.png';
             }
         }
     }

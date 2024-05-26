@@ -24,9 +24,6 @@ new Vue({
 
             // POST request
             axios.post('http://localhost:8080/api/auth/login', data)
-                .catch(error => {
-                    this.errorMessage = 'Usuário ou Senha incorretos';
-                })
                 .then(response => {
                     // Salva os tokens no localStorage
                     localStorage.setItem('accessToken', response.data.accessToken);
@@ -56,6 +53,9 @@ new Vue({
                         .catch(error => {
                             this.errorMessage = error;
                         });
+                })
+                .catch(error => {
+                    this.errorMessage = 'Usuário ou Senha incorretos';
                 });
         },
     }
