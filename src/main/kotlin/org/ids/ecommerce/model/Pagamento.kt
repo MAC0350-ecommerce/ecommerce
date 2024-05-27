@@ -11,7 +11,6 @@ class Pagamento (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int?=null,
-    var pedido: Int,
-    var status: String,
-    var valorPago: Double
+    var status: StatusPagamento,
+    var valor: Double
 )
