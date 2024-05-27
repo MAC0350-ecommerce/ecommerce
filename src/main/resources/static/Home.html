@@ -24,13 +24,13 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                <a class="nav-link active home-btn" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/sobre">Sobre Nós</a>
+                                <a class="nav-link about-btn" href="/sobre">Sobre Nós</a>
                             </li>
                             <li v-if="papel === 'ADMIN'" class="nav-item">
-                                <a class="nav-link" href="/painel">Painel Admin</a>
+                                <a class="nav-link adm-btn" href="/painel">Painel Admin</a>
                             </li>
                             <li v-if="!nome" class="nav-item">
                                 <a class="nav-link" href="/login" id="login-button">Login</a>
