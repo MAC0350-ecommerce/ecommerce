@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-interface ProdutoRepository : JpaRepository<Produto, Int> {}
+interface ProdutoRepository : JpaRepository<Produto, Int> {
+
+}

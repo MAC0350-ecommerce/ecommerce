@@ -26,7 +26,9 @@ class Produto (
     @field:NotEmpty(message = "Lista de fotos não pode ser vazia")
     @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var fotos : List<Foto>,
-    var quantidade : Int?=0
+    var quantidade : Int?=0,
+    @ManyToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var categoria: Categoria
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
