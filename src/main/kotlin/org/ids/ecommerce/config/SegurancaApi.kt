@@ -56,6 +56,10 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
+                    /* Pedidos */
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/check")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/")).permitAll()
+
                     /* Recursos */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/img/*")).permitAll()
 

@@ -28,7 +28,10 @@ class Pedido (
     var itens : List<Item>,
     @field:NotNull
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var pagamento: Pagamento
+    var pagamento: Pagamento,
+    @ManyToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var usuario: Usuario
+
 )
 {
     override fun equals(other: Any?): Boolean {

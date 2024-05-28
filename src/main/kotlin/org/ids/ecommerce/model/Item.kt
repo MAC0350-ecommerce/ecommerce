@@ -21,7 +21,8 @@ class Item (
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var dataCadastro: Date?,
     @field:NotNull
-    var produto_id: Int
+    var produto_id: Int,
+    var estaDisponivel : Boolean?=false
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
