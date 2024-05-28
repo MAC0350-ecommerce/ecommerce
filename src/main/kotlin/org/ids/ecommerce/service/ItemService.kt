@@ -4,12 +4,14 @@ import org.ids.ecommerce.dto.ItemReq
 import org.ids.ecommerce.dto.ItemRes
 import org.ids.ecommerce.model.Item
 import org.ids.ecommerce.repository.ItemRepository
+import org.ids.ecommerce.repository.ProdutoRepository
 import org.springframework.stereotype.Service
 
 
 @Service
 class ItemService (
-    private var itemRepository: ItemRepository
+    private var itemRepository: ItemRepository,
+    private var produtoRepository: ProdutoRepository
 ) {
     fun findAll() : List<ItemRes> {
         var lista = itemRepository.findAll()
@@ -33,6 +35,9 @@ class ItemService (
     }
 
     fun criaItem(itemReq: ItemReq) : ItemRes {
+
+        var produto = produtoRepository.findById(itemReq.produto_id).get()
+
         var itemSalvo = itemRepository.save(
             Item(
                 id = null,
@@ -41,6 +46,9 @@ class ItemService (
                 dataCadastro = null
             )
         )
+
+        produto.quantidade = produto.quantidade?.plus(1)
+        produtoRepository.save(produto)
 
         return ItemRes(
             id = itemSalvo.id!!,
