@@ -32,7 +32,6 @@ class Pedido (
 )
 {
     override fun equals(other: Any?): Boolean {
-        println("INIT")
         if (this === other) return true
         if (other !is Pedido) return false
         val result = this.id == other.id &&
