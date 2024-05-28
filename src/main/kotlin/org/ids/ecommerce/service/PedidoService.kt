@@ -45,14 +45,16 @@ class PedidoService(
     fun criaPedido(pedidoReq: PedidoReq) : PedidoRes {
         val checkPedido = checkPedido(pedidoReq)
 
-        var itens = mutableListOf<Item>()
-
-        val itensBanco = itemRepository.findAllByEstaDisponivelTrue().toList()
+        val itens = mutableListOf<Item>()
 
         for (item in pedidoReq.produtos) {
-            for (i in 0..item.quantidade) {
+            val itensBanco = itemRepository.findAllByProdutoIdAndEstaDisponivelTrue(item.produto_id)
+            if (itensBanco.isEmpty()){
+                throw Exception("Não há itens disponíveis para venda")
+            }
+
+            for (i in 1..item.quantidade) {
                 val itemLista : Item = itensBanco.removeFirst()
-                println(itemLista.codigo)
                 itens.addFirst(itemLista)
             }
         }

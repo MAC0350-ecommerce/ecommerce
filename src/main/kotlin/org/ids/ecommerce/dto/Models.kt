@@ -12,7 +12,7 @@ data class PedidoRes (var id: Int, var valorTotal: Double, var precoFrete: Doubl
 
 data class ItemCarrinho (var produto_id: Int, var quantidade: Int)
 
-data class ItemReq (var produto_id: Int, var codigo: String)
+data class ItemReq (var produto_id: Int, var codigo: String, var estaDisponivel: Boolean)
 
 data class ItemRes (val id: Int, var produto_id: Int, var codigo: String, var dataCadastro: String)
 

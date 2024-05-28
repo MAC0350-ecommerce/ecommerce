@@ -22,7 +22,7 @@ class ItemService (
                 x.id?.let {
                     ItemRes(
                         id = it,
-                        produto_id = x.produto_id,
+                        produto_id = x.produtoId,
                         dataCadastro = x.dataCadastro.toString(),
                         codigo = x.codigo
                     )
@@ -42,7 +42,8 @@ class ItemService (
             Item(
                 id = null,
                 codigo = itemReq.codigo,
-                produto_id = itemReq.produto_id,
+                produtoId = itemReq.produto_id,
+                estaDisponivel = itemReq.estaDisponivel,
                 dataCadastro = null
             )
         )
@@ -53,7 +54,7 @@ class ItemService (
         return ItemRes(
             id = itemSalvo.id!!,
             codigo = itemSalvo.codigo,
-            produto_id = itemSalvo.produto_id,
+            produto_id = itemSalvo.produtoId,
             dataCadastro = itemSalvo.dataCadastro.toString()
         )
     }

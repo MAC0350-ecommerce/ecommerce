@@ -21,14 +21,14 @@ class Item (
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var dataCadastro: Date?,
     @field:NotNull
-    var produto_id: Int,
+    var produtoId: Int,
     var estaDisponivel : Boolean?=false
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Item) return false
         return this.id == other.id &&
-                this.produto_id == other.produto_id &&
+                this.produtoId == other.produtoId &&
                 this.dataCadastro == this.dataCadastro &&
                 this.codigo == other.codigo
     }
@@ -37,7 +37,7 @@ class Item (
         var result = id ?: 0
         result = 31 * result + codigo.hashCode()
         result = 31 * result + (dataCadastro?.hashCode() ?: 0)
-        result = 31 * result + produto_id
+        result = 31 * result + produtoId
         return result
     }
 }
