@@ -8,12 +8,14 @@ Autores: Marcelo Nascimento e Victor Nascimento Ribeiro
 Sistema web simples para gerenciamento e venda de produtos.
 
 # Tecnologias
-- Backend: Springboot, Docker e Mysql
-- Frontend: Vue.js
+- Backend: Springboot, Docker e Mysql.
+- Frontend: Vue.js e Bootstrap.
   
 # Funcionalidades
 - Login com token e níveis de usuário
-- Gerenciamento de usuários, produtos, pedidos e itens em estoque
+- Gerenciamento de cadastros, produtos, pedidos e itens disponíveis pelo administrador / logista.
+- Armazenamento de fotos.
+- Processo de compra e gerenciamento de pedidos pelo usuário.
 
 ## Requisitos
 - OpenJDK 21
