@@ -22,7 +22,7 @@ class Categoria (
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var dataCadastro: Date?,
-    var ativado: Boolean
+    var ativado: Boolean?=false
 )
 {
     override fun equals(other: Any?): Boolean {

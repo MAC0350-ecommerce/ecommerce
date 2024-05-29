@@ -4,6 +4,7 @@ import org.ids.ecommerce.dto.ProdutoReq
 import org.ids.ecommerce.dto.ProdutoRes
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Produto
+import org.ids.ecommerce.repository.CategoriaRepository
 import org.ids.ecommerce.repository.FotoRepository
 import org.ids.ecommerce.repository.ProdutoRepository
 import org.springframework.stereotype.Service
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service
 @Service
 class ProdutoService (
     private var produtoRepository: ProdutoRepository,
-    private var fotoRepository: FotoRepository
+    private var fotoRepository: FotoRepository,
+    private var categoriaRepository: CategoriaRepository
 ){
     fun findAll() : List<ProdutoRes> {
         var lista = produtoRepository.findAll().toList()
@@ -27,7 +29,8 @@ class ProdutoService (
                         descricao = x.descricao,
                         ativado = x.ativado,
                         dataCadastro = x.dataCadastro.toString(),
-                        fotos = x.fotos
+                        fotos = x.fotos,
+                        categoria = x.categoria.id!!
                     )
                 }
             if (produto != null) {
@@ -60,6 +63,7 @@ class ProdutoService (
                 ativado = produtoReq.ativado,
                 fotos = fotos,
                 dataCadastro = null,
+                categoria = categoriaRepository.findByIdAndAtivadoTrue(produtoReq.categoria)
             )
         )
 
@@ -70,7 +74,8 @@ class ProdutoService (
             descricao = produtoSalvo.descricao,
             ativado = produtoSalvo.ativado,
             fotos = fotos,
-            dataCadastro = produtoSalvo.dataCadastro.toString()
+            dataCadastro = produtoSalvo.dataCadastro.toString(),
+            categoria = produtoSalvo.categoria.id!!
         )
     }
 }

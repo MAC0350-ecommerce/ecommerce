@@ -6,8 +6,10 @@ import org.ids.ecommerce.dto.UsuarioRes
 import org.ids.ecommerce.model.Cadastro
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Papel
+import org.ids.ecommerce.model.Pedido
 import org.ids.ecommerce.repository.CadastroRepository
 import org.ids.ecommerce.repository.FotoRepository
+import org.ids.ecommerce.repository.PedidoRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service
 class CadastroService (
     private var cadastroRepository: CadastroRepository,
     private var fotoRepository: FotoRepository,
+    private val pedidoRepository: PedidoRepository,
     private val encoder: PasswordEncoder
 ){
     fun criaCadastro (novoUsuario: UsuarioReq): UsuarioRes? {
@@ -74,5 +77,9 @@ class CadastroService (
         }
 
         return listaCadastros
+    }
+
+    fun findAllPedidos (usuario: Int) : List<Pedido> {
+        return pedidoRepository.findAllByUsuarioId(usuario)
     }
 }

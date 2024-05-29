@@ -11,7 +11,7 @@ class CategoriaService (
     private var categoriaRepository: CategoriaRepository,
 ){
     fun listaCategorias () : List<CategoriaRes> {
-        var lista =  categoriaRepository.findAll().toList()
+        var lista =  categoriaRepository.findAllByAtivadoTrue().toList()
         var listaCategorias = mutableListOf<CategoriaRes>()
 
         lista.forEach {x ->
@@ -21,7 +21,7 @@ class CategoriaService (
                         id = it,
                         nome = x.nome,
                         tag = x.tag,
-                        ativado = x.ativado,
+                        ativado = x.ativado!!,
                         dataCadastro = x.dataCadastro.toString()
                     )
                 }
@@ -51,7 +51,7 @@ class CategoriaService (
             nome = categoriaSava.nome,
             tag = categoriaSava.tag,
             dataCadastro = categoriaSava.dataCadastro!!.toString(),
-            ativado = categoriaSava.ativado
+            ativado = categoriaSava.ativado!!
         )
     }
 }
