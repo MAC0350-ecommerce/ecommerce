@@ -36,6 +36,8 @@ class PedidoService(
         }
         val precoFrete = Random(pedidoReq.enderecoEntrega.toHashSet().hashCode()).nextDouble() * 1000 + 50
 
+        valorTotal += precoFrete
+
         return CheckRes(
             valorTotal = valorTotal,
             precoFrete = precoFrete
@@ -59,17 +61,20 @@ class PedidoService(
             }
         }
 
+        var status = if (Random.nextBoolean()) StatusPagamento.PAGO else StatusPagamento.ERRO
+        var foiEntregue = if (status == StatusPagamento.ERRO) false else Random(pedidoReq.enderecoEntrega.toHashSet().hashCode()).nextBoolean()
+
         var novoPedido = Pedido(
             id = null,
             valorTotal = checkPedido.valorTotal,
             enderecoEntrega = pedidoReq.enderecoEntrega,
             precoFrete = checkPedido.precoFrete,
-            foiEntregue = Random(pedidoReq.enderecoEntrega.toHashSet().hashCode()).nextBoolean(),
+            foiEntregue = foiEntregue,
             dataCadastro = null,
             itens = itens,
             pagamento = Pagamento(
                 id = null,
-                status = if (Random.nextBoolean()) StatusPagamento.PAGO else StatusPagamento.ERRO,
+                status = status,
                 valor = checkPedido.valorTotal
             ),
             usuario = usuarioRepository.findById(pedidoReq.usuario_id.toInt()).get()
