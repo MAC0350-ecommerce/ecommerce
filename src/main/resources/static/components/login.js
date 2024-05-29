@@ -17,16 +17,13 @@ new Vue({
             }
 
             // Organiza os dados do usuário
-            const userData = {
+            const data = {
                 login: this.login,
                 senha: this.password
             };
 
             // POST request
-            axios.post('http://localhost:8080/api/auth/login', userData)
-                .catch(error => {
-                    this.errorMessage = 'Usuário ou Senha incorretos';
-                })
+            axios.post('http://localhost:8080/api/auth/login', data)
                 .then(response => {
                     // Salva os tokens no localStorage
                     localStorage.setItem('accessToken', response.data.accessToken);
@@ -48,6 +45,7 @@ new Vue({
                             localStorage.setItem('login', this.login);
                             localStorage.setItem('nome', response.data.nome);
                             localStorage.setItem('foto', response.data.foto);
+                            localStorage.setItem('papel', response.data.papel);
 
                             // Redireciona pra Home
                             window.location.href = '/';
@@ -55,6 +53,9 @@ new Vue({
                         .catch(error => {
                             this.errorMessage = error;
                         });
+                })
+                .catch(error => {
+                    this.errorMessage = 'Usuário ou Senha incorretos';
                 });
         },
     }
