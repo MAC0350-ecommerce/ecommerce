@@ -22,7 +22,12 @@ class Cadastros {
     }
 
     @GetMapping("/{login}")
-    fun findByLogin(@PathVariable login: String) = cadastroService?.findByLogin(login)
+    fun findByLogin(@PathVariable login: String) =
+        cadastroService?.findByLogin(login) ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao obter o usuário pelo login")
+
+    @GetMapping("/{id}/pedidos")
+    fun findAllPedidos(@PathVariable id: String) =
+        cadastroService?.findAllPedidos(id.toInt()) ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Lista de pedidos do usuário não pôde ser obtida")
 
     @PostMapping
     fun criaCadastro(@RequestBody usuarioRequest: UsuarioReq): UsuarioRes =

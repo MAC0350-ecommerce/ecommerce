@@ -60,6 +60,7 @@ class SegurancaApi(
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/check")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/")).permitAll()
 
+
                     /* Recursos */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/img/*")).permitAll()
 
@@ -82,6 +83,7 @@ class SegurancaApi(
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/cadastros")).permitAll()
                     // TODO: PERMITIR SOMENTE O PROPRIO USUARIO
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/*")).authenticated()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/*/pedidos")).authenticated()
                     .requestMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
             }
             .sessionManagement {
