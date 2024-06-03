@@ -33,7 +33,7 @@ class ItensTest {
     @Autowired
     private val webApplicationContext: WebApplicationContext? = null
 
-    final var itemValidoReq = ItemReq(produto_id = 1, codigo = "DFJDKJDLFJ")
+    final var itemValidoReq = ItemReq(produto_id = 1, codigo = "DFJDKJDLFJ", estaDisponivel = true)
     final var itemValidoRes = ItemRes(id = 1, produto_id = 1, dataCadastro = Date().toString(), codigo = "DFJDKJDLFJ")
     final var listaItens = mutableListOf(itemValidoRes, itemValidoRes, itemValidoRes)
     final var listaVazia = mutableListOf<ItemRes>()

@@ -29,9 +29,8 @@ class Pedido (
     @field:NotNull
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var pagamento: Pagamento,
-    @ManyToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @ManyToOne(cascade = [CascadeType.REFRESH], fetch = FetchType.LAZY)
     var usuario: Usuario
-
 )
 {
     override fun equals(other: Any?): Boolean {

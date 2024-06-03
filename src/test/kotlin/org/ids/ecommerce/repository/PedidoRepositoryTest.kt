@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest
 class PedidoRepositoryTest {
     @Autowired
     lateinit var pedidoRepository: PedidoRepository
+    @Autowired
+    lateinit var usuarioRepository: UsuarioRepository
 
     @Test
     fun salvaPedidoComSucesso() {
@@ -24,10 +26,10 @@ class PedidoRepositoryTest {
             precoFrete = 50.00,
             foiEntregue = false,
             dataCadastro = null,
-            itens = listOf(Item(id = null, codigo = "CODIGOTESTE", dataCadastro = null, produto_id = 1)),
-            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99)
+            itens = listOf(Item(id = null, codigo = "CODIGOTESTE1", dataCadastro = null, produtoId = 1)),
+            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99),
+            usuario = usuarioRepository.findById(2).get()
         )
-
         val pedidoSalvo = pedidoRepository.save(novoPedido)
         assertNotNull(pedidoSalvo)
         val pedidoBanco = pedidoRepository.findById(pedidoSalvo.id!!).get()
@@ -46,8 +48,9 @@ class PedidoRepositoryTest {
             precoFrete = 50.00,
             foiEntregue = false,
             dataCadastro = null,
-            itens = listOf(Item(id = null, codigo = "CODIGOTESTE", dataCadastro = null, produto_id = 1)),
-            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99)
+            itens = listOf(Item(id = null, codigo = "CODIGOTESTE2", dataCadastro = null, produtoId = 1)),
+            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99),
+            usuario = usuarioRepository.findById(1).get()
         )
         assertThrows(Exception::class.java) {
             pedidoRepository.save(novoPedido_1)
@@ -62,7 +65,8 @@ class PedidoRepositoryTest {
             foiEntregue = false,
             dataCadastro = null,
             itens = listOf(),
-            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99)
+            pagamento = Pagamento(id = null, status = StatusPagamento.PAGO, valor = 100.99),
+            usuario = usuarioRepository.findById(1).get()
         )
         assertThrows(Exception::class.java) {
             pedidoRepository.save(novoPedido_2)

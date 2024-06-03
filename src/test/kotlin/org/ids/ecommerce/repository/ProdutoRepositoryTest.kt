@@ -1,9 +1,9 @@
 package org.ids.ecommerce.repository
 
+import org.ids.ecommerce.model.Categoria
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Produto
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,7 +21,8 @@ class ProdutoRepositoryTest {
     @Test
     fun salvaProdutoComSucesso() {
         val produtoNovo = Produto(id = null, nome = "produto_teste", descricao = "descricao_produto_novo", preco = 100.00, ativado = true, dataCadastro = null,
-            fotos = listOf(Foto(null, byteArrayOf(1,2,3)), Foto(null, byteArrayOf(1,2,3)))
+            fotos = listOf(Foto(null, byteArrayOf(1,2,3)), Foto(null, byteArrayOf(1,2,3))),
+            categoria = Categoria(id = null, nome = "categoria_teste", tag = "tagCategoria", dataCadastro = null)
         )
         var produtoSalvo = produtoRepository.save(produtoNovo)
         var produtoBanco = produtoRepository.findById(produtoSalvo.id!!).get()
@@ -39,7 +40,7 @@ class ProdutoRepositoryTest {
     }
 
     @Test
-    fun salvaFotoSemSucesso() {
+    fun salvaProdutoSemSucesso() {
     }
 }
 

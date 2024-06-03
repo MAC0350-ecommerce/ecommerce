@@ -35,11 +35,12 @@ class ProdutoTest {
     @Autowired
     private val webApplicationContext: WebApplicationContext? = null
 
-    final var produtoValidoReq = ProdutoReq(nome = "produto_teste", preco = 100.99, descricao = "Produto Teste", ativado = true, fotos = listOf(
-        byteArrayOf(1,2,3), byteArrayOf(1,2,3), byteArrayOf(1,2,3)
-    ))
+    final var produtoValidoReq = ProdutoReq(nome = "produto_teste", preco = 100.99, descricao = "Produto Teste", ativado = true,
+        fotos = listOf(byteArrayOf(1,2,3), byteArrayOf(1,2,3), byteArrayOf(1,2,3)),
+        categoria = 1
+    )
     final var produtoValidoRes = ProdutoRes(nome = "produto_teste", preco = 100.99, descricao = "Produto Teste", ativado = true, fotos = listOf(
-        Foto(1, byteArrayOf(1,2,3)), Foto(2, byteArrayOf(1,2,3)), Foto(3, byteArrayOf(1,2,3))), id = 1, dataCadastro = Date().toString())
+        Foto(1, byteArrayOf(1,2,3)), Foto(2, byteArrayOf(1,2,3)), Foto(3, byteArrayOf(1,2,3))), id = 1, dataCadastro = Date().toString(), categoria = 1)
 
     final var listaProdutos = mutableListOf(produtoValidoRes, produtoValidoRes, produtoValidoRes)
     final var listaVazia = mutableListOf<ProdutoRes>()
