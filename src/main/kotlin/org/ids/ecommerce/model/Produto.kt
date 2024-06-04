@@ -22,7 +22,7 @@ class Produto (
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var dataCadastro: Date?,
     @field:NotEmpty(message = "Lista de fotos não pode ser vazia")
-    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     var fotos : List<Foto>,
     var quantidade : Int?=0,
     @ManyToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)

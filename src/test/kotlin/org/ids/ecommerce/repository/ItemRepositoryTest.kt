@@ -15,7 +15,7 @@ class ItemRepositoryTest {
 
     @Test
     fun salvaItemComSucesso() {
-        var novoItem = Item(id = null, produto_id = 1, dataCadastro = null, codigo = "CODIGODETESTE123")
+        var novoItem = Item(id = null, produtoId = 1, dataCadastro = null, codigo = "CODIGODETESTE123")
         var itemSalvo = itemRepository.save(novoItem)
         assertNotNull(itemSalvo)
         var itemBanco = itemRepository.findById(itemSalvo.id!!).get()
@@ -27,14 +27,14 @@ class ItemRepositoryTest {
     fun salvaItemSemSucesso() {
 
         // Codigo vazio
-        val novoItem_1 = Item(id = null, produto_id = 1, dataCadastro = null, codigo = "")
+        val novoItem_1 = Item(id = null, produtoId = 1, dataCadastro = null, codigo = "")
         Assertions.assertThrows(Exception::class.java) {
             itemRepository.save(novoItem_1)
         }
 
         // Código duplicado
-        val novoItem_2 = Item(id = null, produto_id = 1, dataCadastro = null, codigo = "CODIGODETESTE123")
-        val novoItem_3 = Item(id = null, produto_id = 1, dataCadastro = null, codigo = "CODIGODETESTE123")
+        val novoItem_2 = Item(id = null, produtoId = 1, dataCadastro = null, codigo = "CODIGODETESTE1234")
+        val novoItem_3 = Item(id = null, produtoId = 1, dataCadastro = null, codigo = "CODIGODETESTE1234")
         itemRepository.save(novoItem_2)
         Assertions.assertThrows(Exception::class.java) {
             itemRepository.save(novoItem_3)
@@ -42,7 +42,7 @@ class ItemRepositoryTest {
         }
 
         // Produto inexistente
-        val novoItem_4 = Item(id = null, produto_id = -1, dataCadastro = null, codigo = "CODIGODETESTE1234")
+        val novoItem_4 = Item(id = null, produtoId = -1, dataCadastro = null, codigo = "CODIGODETESTE12345")
         Assertions.assertThrows(Exception::class.java) {
             itemRepository.save(novoItem_4)
         }
