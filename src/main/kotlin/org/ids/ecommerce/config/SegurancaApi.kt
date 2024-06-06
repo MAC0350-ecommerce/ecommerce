@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher
+import org.springframework.web.cors.CorsConfiguration
 
 
 @Configuration
@@ -53,6 +54,13 @@ class SegurancaApi(
         jwtFiltro: JwtFiltro
     ): DefaultSecurityFilterChain =
         http
+            .cors { cors ->
+                val config = CorsConfiguration()
+                config.applyPermitDefaultValues()
+                config.allowedOrigins = listOf("*")
+                config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE")
+                cors.configurationSource { config }
+            }
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
@@ -89,12 +97,14 @@ class SegurancaApi(
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
+            /*
             .formLogin{
                 it
                     .loginPage("/login")
                     .permitAll()
                     .defaultSuccessUrl("/")
             }
+             */
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter::class.java)
             .build()
