@@ -1,6 +1,8 @@
 package org.ids.ecommerce.config
 
+import com.sun.net.httpserver.HttpServer
 import jakarta.servlet.FilterChain
+import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.ids.ecommerce.service.TokenService
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
+import java.net.HttpCookie
 
 private const val BEARER_PREFIX = "Bearer "
 
@@ -29,7 +32,8 @@ class JwtFiltro(
         val cookie: String? = request.getHeader("Cookie")
 
         if (cookie != null && authHeader == null) {
-            authHeader = "Bearer " + request.getHeader("Cookie")
+            val cookies = HttpCookie.parse(cookie)
+            authHeader = "Bearer " + cookies.get(0).value
         }
 
         if (authHeader.doesNotContainBearerToken()) {
