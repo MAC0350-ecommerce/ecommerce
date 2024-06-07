@@ -14,6 +14,7 @@ new Vue({
         this.refreshToken = localStorage.getItem('refreshToken');
         this.nome = localStorage.getItem('nome');
         this.papel = localStorage.getItem('papel');
+        this.foto = localStorage.getItem('foto')
     },
     methods: {
         disconnect() {
@@ -42,6 +43,7 @@ new Vue({
             // Refresh na pagina
             location.reload();
         },
+
         // Exibe a foto do usuário
         displayUserImage() {
             var userImg = document.getElementById('display1');
@@ -53,5 +55,5 @@ new Vue({
                 userImg.src = '../img/usuario_padrao.png';
             }
         }
-    }
+    },
 });

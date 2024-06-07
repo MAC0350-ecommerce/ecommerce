@@ -30,7 +30,7 @@ new Vue({
                     localStorage.setItem('refreshToken', response.data.refreshToken);
 
                     // Salva o token no cookie
-                    document.cookie = response.data.accessToken;
+                    document.cookie = "tokenAPP=" + response.data.accessToken + ";"
 
                     // Define headers
                     const accessToken = response.data.accessToken;
