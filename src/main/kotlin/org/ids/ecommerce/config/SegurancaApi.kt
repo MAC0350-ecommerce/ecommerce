@@ -66,7 +66,7 @@ class SegurancaApi(
                 it
                     /* Categorias */
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/categorias/")).hasRole("ADMIN")
-                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/ativadas/")).permitAll()
 
                     /* Pedidos */
