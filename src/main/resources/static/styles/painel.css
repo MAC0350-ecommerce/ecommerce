@@ -1,6 +1,5 @@
-/* Global styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -30,11 +29,11 @@ nav ul li a {
 
 
 .logout-btn {
-    cursor: pointer; /* Default */
+    cursor: pointer;
 }
 
 .logout-btn:hover {
-    cursor: pointer; /* Muda quando em cima */
+    cursor: pointer; 
 }
 
 .navbar-custom {
@@ -112,6 +111,25 @@ nav ul li a {
     position: relative;
 }
 
-.fixed-width-column {
-    width: 80px;
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
+
+#new_descricao {
+    overflow: auto;
+    white-space: pre-wrap;
+    min-height: 120px;
+    margin-bottom: 10px;
+}
+
+#new_ativado {
+    width: 45px; 
+    height: 25px;
+}
+
+

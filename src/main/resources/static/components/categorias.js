@@ -21,8 +21,8 @@ function waitForElementToExist(selector) {
 new Vue({
     el: '#app',
     data: {
-        new_pid: '',
-        new_codigo: '',
+        new_tag: '',
+        new_nome: '',
         new_ativado: true
     },
     mounted() {
@@ -34,7 +34,7 @@ new Vue({
 
         // GET request
         waitForElementToExist('#loading').then(loading => {
-            axios.get('http://localhost:8080/api/itens/', { headers })
+            axios.get('http://localhost:8080/api/categorias/', { headers })
                 .then(response => {
                     const data = response.data;
                     const table = document.querySelector('#data-table');
@@ -49,20 +49,25 @@ new Vue({
                         idCell.textContent = row.id;
                         tr.appendChild(idCell);
 
-                        // ID do Produto
-                        const pidCell = document.createElement('td');
-                        pidCell.textContent = row.produto_id;
-                        tr.appendChild(pidCell);
+                        // Tag
+                        const tagCell = document.createElement('td');
+                        tagCell.textContent = row.tag;
+                        tr.appendChild(tagCell);
 
                         // Codigo
-                        const codigoCell = document.createElement('td');
-                        codigoCell.textContent = row.codigo;
-                        tr.appendChild(codigoCell);
+                        const nomeCell = document.createElement('td');
+                        nomeCell.textContent = row.nome;
+                        tr.appendChild(nomeCell);
 
                         // Data de Cadastro
                         const dataCell = document.createElement('td');
                         dataCell.textContent = row.dataCadastro;
                         tr.appendChild(dataCell);
+
+                        // Ativado
+                        const ativadoCell = document.createElement('td');
+                        ativadoCell.textContent = row.ativado ? 'Sim' : 'Não';
+                        tr.appendChild(ativadoCell)
 
                         tableBody.appendChild(tr);
                     });
@@ -79,20 +84,20 @@ new Vue({
     },
     methods: {
         addNewItem() {
-            if (!this.new_pid || !this.new_codigo) {
+            if (!this.new_tag || !this.new_nome) {
                 alert("Preencha todos os campos!");
                 return;
             }
             
             // Organiza os dados
             const data = {
-                produto_id: this.new_pid,
-                codigo: this.new_codigo,
-                estaDisponivel: this.new_ativado
+                tag: this.new_tag,
+                nome: this.new_nome,
+                ativado: this.new_ativado
             };
             
             // POST request
-            axios.post('http://localhost:8080/api/itens/', data)
+            axios.post('http://localhost:8080/api/categorias/', data)
                 .then(response => {
                     alert("Item adicionado com sucesso!");
                     window.location.reload();

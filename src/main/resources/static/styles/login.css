@@ -1,10 +1,8 @@
-/* Global styles */
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
 }
 
-/* Container for login form */
 .login-container {
     width: 300px;
     margin: 0 auto;
@@ -15,7 +13,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input styles */
 input {
     width: 100%;
     padding: 12px;
@@ -25,7 +22,6 @@ input {
     box-sizing: border-box;
 }
 
-/* Button styles */
 button {
     width: 100%;
     padding: 12px;
@@ -40,7 +36,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Error message style */
 .error-message {
     color: red;
     margin-top: 10px;
@@ -52,7 +47,6 @@ img {
     width: 30px;
     height: 30x;
 }
-
 
 
 footer {
