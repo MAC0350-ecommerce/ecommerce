@@ -64,10 +64,14 @@ class SegurancaApi(
             .csrf { it.disable()}
             .authorizeHttpRequests {
                 it
+                    /* Categorias */
+                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/categorias/")).hasRole("ADMIN")
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/ativadas/")).permitAll()
+
                     /* Pedidos */
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/check")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/pedidos/")).permitAll()
-
 
                     /* Recursos */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/img/*")).permitAll()
@@ -80,13 +84,15 @@ class SegurancaApi(
                     /* Login */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/login")).permitAll()
 
-
+                    /* Itens */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/itens/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/itens/")).hasRole("ADMIN")
+
+                    /* Produtos */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/produtos/")).hasRole("ADMIN")
-                    .requestMatchers(antMatcher(HttpMethod.POST, "/api/categorias/")).hasRole("ADMIN")
-                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/categorias/")).permitAll()
+
+                    /* Cadastros e autenticacao */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/cadastros/")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/cadastros")).permitAll()
                     // TODO: PERMITIR SOMENTE O PROPRIO USUARIO

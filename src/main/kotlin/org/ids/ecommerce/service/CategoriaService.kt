@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service
 class CategoriaService (
     private var categoriaRepository: CategoriaRepository,
 ){
-    fun listaCategorias () : List<CategoriaRes> {
-        var lista =  categoriaRepository.findAllByAtivadoTrue().toList()
-        var listaCategorias = mutableListOf<CategoriaRes>()
+    fun listaCategoriasAtivadas(): List<CategoriaRes> {
+        val lista =  categoriaRepository.findAllByAtivadoTrue().toList()
+        val listaCategorias = mutableListOf<CategoriaRes>()
 
         lista.forEach {x ->
-            var categoria =
+            val categoria =
                 x.id?.let {
                     CategoriaRes (
                         id = it,
@@ -31,6 +31,29 @@ class CategoriaService (
         }
         return listaCategorias;
     }
+
+    fun listaCategorias () : List<CategoriaRes> {
+        val lista =  categoriaRepository.findAll().toList()
+        val listaCategorias = mutableListOf<CategoriaRes>()
+
+        lista.forEach {x ->
+            val categoria =
+                x.id?.let {
+                    CategoriaRes (
+                        id = it,
+                        nome = x.nome,
+                        tag = x.tag,
+                        ativado = x.ativado!!,
+                        dataCadastro = x.dataCadastro.toString()
+                    )
+                }
+            if (categoria != null) {
+                listaCategorias.add(categoria)
+            }
+        }
+        return listaCategorias;
+    }
+
     fun criaCategoria (novaCategoria: CategoriaReq) : CategoriaRes? {
         if (novaCategoria.nome == "" || novaCategoria.tag == "" ) {
             return null;

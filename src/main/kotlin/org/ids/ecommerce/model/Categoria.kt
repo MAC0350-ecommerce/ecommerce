@@ -2,11 +2,8 @@ package org.ids.ecommerce.model
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.NotEmpty
-import jakarta.validation.constraints.Pattern
 import org.hibernate.annotations.Generated
 import org.hibernate.annotations.GenerationTime
-import org.jetbrains.annotations.NotNull
 import java.util.*
 
 @Entity

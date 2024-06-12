@@ -27,4 +27,9 @@ class Categorias {
     fun listaCategorias() : List<CategoriaRes> =
         categoriaService?.listaCategorias() ?: throw ResponseStatusException(
             HttpStatus.BAD_REQUEST, "Erro ao listar as categorias")
+
+    @GetMapping("/ativadas/")
+    fun listaCategoriasAtivadas() : List<CategoriaRes> =
+        categoriaService?.listaCategoriasAtivadas() ?: throw ResponseStatusException(
+            HttpStatus.BAD_REQUEST, "Erro ao listar as categorias ativadas")
 }
