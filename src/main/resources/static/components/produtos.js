@@ -49,23 +49,25 @@ function createCarousel(id, photos) {
 
     div.appendChild(innerDiv);
 
-    // botao voltar
-    const prevButton = document.createElement('button');
-    prevButton.className = 'carousel-control-prev';
-    prevButton.type = 'button';
-    prevButton.setAttribute('data-bs-target', `#${carouselId}`);
-    prevButton.setAttribute('data-bs-slide', 'prev');
-    prevButton.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span>';
-    div.appendChild(prevButton);
+    if (photos.length > 1){
+        // botao voltar
+        const prevButton = document.createElement('button');
+        prevButton.className = 'carousel-control-prev';
+        prevButton.type = 'button';
+        prevButton.setAttribute('data-bs-target', `#${carouselId}`);
+        prevButton.setAttribute('data-bs-slide', 'prev');
+        prevButton.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span>';
+        div.appendChild(prevButton);
 
-    // botao proximo
-    const nextButton = document.createElement('button');
-    nextButton.className = 'carousel-control-next';
-    nextButton.type = 'button';
-    nextButton.setAttribute('data-bs-target', `#${carouselId}`);
-    nextButton.setAttribute('data-bs-slide', 'next');
-    nextButton.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>';
-    div.appendChild(nextButton);
+        // botao proximo
+        const nextButton = document.createElement('button');
+        nextButton.className = 'carousel-control-next';
+        nextButton.type = 'button';
+        nextButton.setAttribute('data-bs-target', `#${carouselId}`);
+        nextButton.setAttribute('data-bs-slide', 'next');
+        nextButton.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>';
+        div.appendChild(nextButton);
+    }
 
     return div;
 }
