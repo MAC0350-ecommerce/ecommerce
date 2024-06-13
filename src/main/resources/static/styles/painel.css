@@ -1,6 +1,5 @@
-/* Global styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -10,58 +9,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    font-size: 1.2em;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-
-.logout-btn {
-    cursor: pointer; /* Default */
-}
-
-.logout-btn:hover {
-    cursor: pointer; /* Muda quando em cima */
-}
-
-.navbar-custom {
-    min-height: 65px; 
-}
-
-.logo {
-    width: 40px; 
-    height: 40px; 
-    border-radius: 15px;
-    overflow: hidden; 
-    object-fit: cover; 
-    object-position: center; 
-    margin-left: 80px;
-    margin-right: 20px;
-}
-
-.navbar-custom .nav-link {
-    color: #f8f9fa; 
-}
-
-.navbar-custom .nav-link:hover {
-    color: rgb(189, 201, 212); 
-}
-
-.blank-space {
-    height: 400px; 
 }
 
 .button-estilo {
@@ -80,14 +27,9 @@ nav ul li a {
     text-align: right;
 }
 
-#add-button {
-    width: auto; 
-}
-
 .button-estilo:hover {
     background-color: #0056b3;
 }
-
 
 .about-container {
     width: 900px;
@@ -112,6 +54,72 @@ nav ul li a {
     position: relative;
 }
 
-.fixed-width-column {
-    width: 80px;
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    margin-bottom: 10px;
+}
+
+/* switch */
+#new_ativado {
+    width: 45px; 
+    height: 25px;
+}
+
+/* carousel */
+.carousel-indicators [data-bs-target] {
+    background-color: #000;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%);
+}
+
+/* navbar */
+.navbar{
+    -webkit-box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand img{
+    width: 33px;
+}
+.navbar-brand span{
+    letter-spacing: 2px;
+    font-family: var(--lg-font);
+}
+.nav-link:hover{
+    color: var(--pink)!important;
+}
+.nav-item{
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+}
+.navbar-nav {
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-brand {
+    margin-right: auto;
+}
+
+.collapse.navbar-collapse {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-grow: 0;
 }

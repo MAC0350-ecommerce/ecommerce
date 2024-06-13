@@ -18,12 +18,68 @@ function waitForElementToExist(selector) {
     });
 }
 
+// seta os parametros do carousel
+function createCarouselItem(src, isActive) {
+    const div = document.createElement('div');
+    div.className = `carousel-item ${isActive ? 'active' : ''}`;
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'd-block w-100';
+    div.appendChild(img);
+    return div;
+}
+
+// cria o carousel
+function createCarousel(id, photos) {
+    const carouselId = `carousel-${id}`;
+    const div = document.createElement('div');
+    div.id = carouselId;
+    div.className = 'carousel slide';
+    div.setAttribute('data-bs-ride', 'carousel');
+
+    const innerDiv = document.createElement('div');
+    innerDiv.className = 'carousel-inner';
+
+    for (let i = 0; i < photos.length; i++) {
+        const src = 'data:image/png;base64,' + photos[i].foto.replace(/"/g, '');
+        const isActive = i === 0; // seta o primeiro como o padrao
+        const carouselItem = createCarouselItem(src, isActive);
+        innerDiv.appendChild(carouselItem);
+    }
+
+    div.appendChild(innerDiv);
+
+    if (photos.length > 1){
+        // botao voltar
+        const prevButton = document.createElement('button');
+        prevButton.className = 'carousel-control-prev';
+        prevButton.type = 'button';
+        prevButton.setAttribute('data-bs-target', `#${carouselId}`);
+        prevButton.setAttribute('data-bs-slide', 'prev');
+        prevButton.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span>';
+        div.appendChild(prevButton);
+
+        // botao proximo
+        const nextButton = document.createElement('button');
+        nextButton.className = 'carousel-control-next';
+        nextButton.type = 'button';
+        nextButton.setAttribute('data-bs-target', `#${carouselId}`);
+        nextButton.setAttribute('data-bs-slide', 'next');
+        nextButton.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>';
+        div.appendChild(nextButton);
+    }
+
+    return div;
+}
+
+
 new Vue({
     el: '#app',
     data: {
         new_nome: '',
         new_preco: '',
         new_descricao: '',
+        new_categoria: '',
         new_ativado: '',
         new_fotos: [],
         imageBytes: null
@@ -42,98 +98,61 @@ new Vue({
                     const data = response.data;
                     const tableBody = document.querySelector('#data-table tbody');
                     const table = document.querySelector('#data-table');
-
+        
                     // Adiciona as linhas na tabela
                     data.forEach(row => {
                         const tr = document.createElement('tr');
-
+    
                         // ID
                         const idCell = document.createElement('td');
                         idCell.textContent = row.id;
                         tr.appendChild(idCell);
-
+    
                         // Nome
                         const nomeCell = document.createElement('td');
                         nomeCell.textContent = row.nome;
                         tr.appendChild(nomeCell);
-
+    
                         // Preco
                         const precoCell = document.createElement('td');
-                        precoCell.textContent = row.preco;
+                        const formattedPrice = parseFloat(row.preco).toFixed(2);
+                        precoCell.textContent = formattedPrice;
                         tr.appendChild(precoCell);
-
+    
                         // Data de Cadastro
                         const dataCell = document.createElement('td');
                         dataCell.textContent = row.dataCadastro;
+                        dataCell.style.width = '110px';
                         tr.appendChild(dataCell);
-
+    
+                        // Categoria
+                        const categoriaCell = document.createElement('td');
+                        categoriaCell.textContent = row.categoria;
+                        tr.appendChild(categoriaCell);
+    
                         // Descricao
                         const descricaoCell = document.createElement('td');
                         descricaoCell.textContent = row.descricao;
+                        descricaoCell.style.overflow = 'auto';
+                        descricaoCell.style.whiteSpace = 'pre-wrap';
+                        descricaoCell.style.minHeight = '120px';
+                        descricaoCell.style.marginBottom = '10px';
                         tr.appendChild(descricaoCell);
-
+    
                         // Ativado
                         const ativadoCell = document.createElement('td');
                         ativadoCell.textContent = row.ativado ? 'Sim' : 'Não';
-                        tr.appendChild(ativadoCell)
-
-                        // Fotos Carousel
+                        tr.appendChild(ativadoCell);
+    
+                        // Fotos
                         const fotosCell = document.createElement('td');
-                        const carouselDiv = document.createElement('div');
-                        carouselDiv.id = 'carouselExampleControls' + row.id; 
-                        carouselDiv.className = 'carousel slide';
-                        carouselDiv.setAttribute('data-ride', 'carousel');
-                        const innerDiv = document.createElement('div');
-                        innerDiv.className = 'carousel-inner';
-
-                        // Adiciona as fotos no carousel
-                        for (let i = 0; i < row.fotos.length; i++) {
-                            const foto = row.fotos[i].foto;
-                            const carouselItem = document.createElement('div');
-                            carouselItem.className = 'carousel-item' + (i === 0 ? ' active' : ''); // Set first item as active
-                            const img = document.createElement('img');
-                            img.src = 'data:image/png;base64,' + foto.replace(/"/g, '');
-                            img.style.border = '1px solid #000';
-                            img.style.width = '80px';
-                            img.style.height = '80px';
-
-                            carouselItem.appendChild(img);
-                            innerDiv.appendChild(carouselItem);
+                        if (row.fotos && row.fotos.length > 0) {
+                            const carousel = createCarousel(row.id, row.fotos);
+                            fotosCell.style.width = '80px';
+                            fotosCell.appendChild(carousel);
                         }
-
-                        if (row.fotos.length > 1) {
-                            // Previous button
-                            const prevControl = document.createElement('a');
-                            prevControl.className = 'carousel-control-prev';
-                            prevControl.href = '#carouselExampleControls' + row.id;
-                            prevControl.setAttribute('role', 'button');
-                            prevControl.setAttribute('data-slide', 'prev');
-                            prevControl.innerHTML = '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only"> < </span>';
-                            prevControl.style.color = 'black';
-                            prevControl.style.textDecoration = 'none';
-                            prevControl.style.fontSize = '1.5rem';
-                            prevControl.style.opacity = '1';
-                            
-                            // Next button
-                            const nextControl = document.createElement('a');
-                            nextControl.className = 'carousel-control-next';
-                            nextControl.href = '#carouselExampleControls' + row.id;
-                            nextControl.setAttribute('role', 'button');
-                            nextControl.setAttribute('data-slide', 'next');
-                            nextControl.innerHTML = '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only"> > </span>';
-                            nextControl.style.color = 'black';
-                            nextControl.style.textDecoration = 'none';
-                            nextControl.style.fontSize = '1.5rem';
-                            nextControl.style.opacity = '1';
-
-                            // Adiciona os elementos do carousel na pagina
-                            carouselDiv.appendChild(prevControl);
-                            carouselDiv.appendChild(nextControl);
-                        }
-                        carouselDiv.appendChild(innerDiv);
-                        fotosCell.appendChild(carouselDiv);
                         tr.appendChild(fotosCell);
-
+    
                         tableBody.appendChild(tr);
                     });
                     loading.classList.add('d-none'); // Esconde o texto de carregamento
@@ -143,35 +162,22 @@ new Vue({
                     console.error(error);
                     alert(error);
                 });
-            });
+        });
     },
     methods: {
         addNewItem() {
-            if (!this.new_nome || !this.new_preco || !this.new_descricao || !this.new_ativado){
+            if (!this.new_nome || !this.new_preco || !new_categoria){
                 alert("Preencha todos os campos!");
                 return;
             }
             
             // Formata o campo 'preco'
-            this.new_preco = parseFloat(this.new_preco);
-
-            // Formata o campo 'ativado'
-            const ativadoLowercase = this.new_ativado.toLowerCase();
-            if (ativadoLowercase === 'sim' || ativadoLowercase === '1'){
-                this.new_ativado = "true";
-            }
-            else if (ativadoLowercase === 'não' || ativadoLowercase === 'nao' || ativadoLowercase === '0'){
-                this.new_ativado = "false";
-            }
-            else if (ativadoLowercase !== 'true' && ativadoLowercase !== 'false'){
-                alert("O campo 'Ativado' deve ser 'Sim' ou 'Não'");
-                return;
-            }
-
+            this.new_preco = parseFloat(this.new_preco)
 
             // Organiza os dados
             const data = {
                 nome: this.new_nome,
+                categoria: this.new_categoria,
                 preco: this.new_preco,
                 descricao: this.new_descricao,
                 ativado: this.new_ativado,

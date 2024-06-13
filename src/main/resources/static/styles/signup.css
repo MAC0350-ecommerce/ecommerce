@@ -1,6 +1,6 @@
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
@@ -66,12 +66,12 @@ footer {
 }
 
 button {
-    margin-right: 10px; /* Adjust margin as needed */
+    margin-right: 10px; 
     margin-bottom: 7px
 }
 
 .image-name {
-    font-size: 12px; /* Adjust font size as needed */
-    margin: 0; /* Remove default margin */
+    font-size: 12px; 
+    margin: 0; 
 }
 
