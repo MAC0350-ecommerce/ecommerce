@@ -29,12 +29,16 @@ class PedidoService(
     }
 
     fun checkPedido(pedidoReq: PedidoReq) : CheckRes {
-        var valorTotal : Double = 0.0
+        var valorTotal = 0.0
         for(item in pedidoReq.produtos) {
             val produto = produtoRepository.findById(item.produto_id).get()
             valorTotal += produto.preco * item.quantidade
         }
-        val precoFrete = Random(pedidoReq.enderecoEntrega.toHashSet().hashCode()).nextDouble() * 1000 + 50
+
+        var precoFrete = 0.0;
+        if (pedidoReq.enderecoEntrega!!.isNotBlank()) {
+            precoFrete += Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextDouble() * 1000 + 50
+        }
 
         valorTotal += precoFrete
 
@@ -45,29 +49,33 @@ class PedidoService(
     }
 
     fun criaPedido(pedidoReq: PedidoReq) : PedidoRes {
+        if (pedidoReq.enderecoEntrega == "") {
+            throw Exception("Sem endereço de entrega!")
+        }
         val checkPedido = checkPedido(pedidoReq)
 
         val itens = mutableListOf<Item>()
 
         for (item in pedidoReq.produtos) {
             val itensBanco = itemRepository.findAllByProdutoIdAndEstaDisponivelTrue(item.produto_id)
+
             if (itensBanco.isEmpty()){
                 throw Exception("Não há itens disponíveis para venda")
             }
 
-            for (i in 1..item.quantidade) {
-                val itemLista : Item = itensBanco.removeFirst()
+            for (i in 0..< item.quantidade) {
+                val itemLista : Item = itensBanco[i]
                 itens.addFirst(itemLista)
             }
         }
 
         var status = if (Random.nextBoolean()) StatusPagamento.PAGO else StatusPagamento.ERRO
-        var foiEntregue = if (status == StatusPagamento.ERRO) false else Random(pedidoReq.enderecoEntrega.toHashSet().hashCode()).nextBoolean()
+        var foiEntregue = if (status == StatusPagamento.ERRO) false else Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextBoolean()
 
         var novoPedido = Pedido(
             id = null,
             valorTotal = checkPedido.valorTotal,
-            enderecoEntrega = pedidoReq.enderecoEntrega,
+            enderecoEntrega = pedidoReq.enderecoEntrega!!,
             precoFrete = checkPedido.precoFrete,
             foiEntregue = foiEntregue,
             dataCadastro = null,

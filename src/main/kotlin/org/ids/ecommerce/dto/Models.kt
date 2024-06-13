@@ -6,7 +6,7 @@ import org.ids.ecommerce.model.Pagamento
 
 data class CheckRes (var precoFrete: Double, var valorTotal: Double)
 
-data class PedidoReq (var usuario_id: String, var produtos: List<ItemCarrinho>, var enderecoEntrega: String)
+data class PedidoReq (var usuario_id: String, var produtos: List<ItemCarrinho>, var enderecoEntrega: String?="")
 
 data class PedidoRes (var id: Int, var valorTotal: Double, var precoFrete: Double, var foiEntregue: Boolean, var dataCadastro: String, var itens: List<Item>, var pagamento: Pagamento, var usuario_id: Int)
 
