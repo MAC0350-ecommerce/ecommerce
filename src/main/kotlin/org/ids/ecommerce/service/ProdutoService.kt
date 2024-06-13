@@ -15,6 +15,31 @@ class ProdutoService (
     private var fotoRepository: FotoRepository,
     private var categoriaRepository: CategoriaRepository
 ){
+    fun findAllAtivados() : List<ProdutoRes>{
+        var lista = produtoRepository.findAllByAtivadoIsTrue().toList()
+        var listaProdutos = mutableListOf<ProdutoRes>()
+
+        lista.forEach { x ->
+            var produto =
+                x.id?.let {
+                    ProdutoRes (
+                        id = it,
+                        nome = x.nome,
+                        preco = x.preco,
+                        descricao = x.descricao,
+                        ativado = x.ativado,
+                        dataCadastro = x.dataCadastro.toString(),
+                        fotos = x.fotos,
+                        categoria = x.categoria.id!!
+                    )
+                }
+            if (produto != null) {
+                listaProdutos.add(produto)
+            }
+        }
+        return listaProdutos
+    }
+
     fun findAll() : List<ProdutoRes> {
         var lista = produtoRepository.findAll().toList()
         var listaProdutos = mutableListOf<ProdutoRes>()
@@ -39,8 +64,9 @@ class ProdutoService (
         }
         return listaProdutos
     }
+
     fun criaProduto(produtoReq: ProdutoReq) : ProdutoRes {
-        val fotos : List<Foto> = ArrayList()
+        val fotos : MutableList<Foto> = ArrayList()
         produtoReq.fotos?.forEach{ x ->
             val foto =
                 Foto(

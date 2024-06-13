@@ -15,6 +15,11 @@ class Produtos {
     @Autowired
     var produtoService: ProdutoService? = null
 
+    @GetMapping("/ativados")
+    fun findAllAtivados() : List<ProdutoRes> =
+        produtoService?.findAllAtivados() ?: throw ResponseStatusException(
+            HttpStatus.BAD_REQUEST, "Erro ao listar os produtos")
+
     @GetMapping("/")
     fun findAll() : List<ProdutoRes> =
         produtoService?.findAll() ?: throw ResponseStatusException(

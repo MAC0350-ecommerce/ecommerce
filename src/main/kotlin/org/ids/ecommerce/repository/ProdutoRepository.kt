@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ProdutoRepository : JpaRepository<Produto, Int> {
-
+    fun findAllByAtivadoIsTrue() : List<Produto>
 }
