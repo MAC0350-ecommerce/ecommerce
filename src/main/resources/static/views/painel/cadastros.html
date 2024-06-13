@@ -12,31 +12,36 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-            <div class="container-fluid">
-                <a class="navbar-brand mx-auto">
-                    <img class="logo" src="https://cdn-icons-png.flaticon.com/512/5540/5540527.png" alt="Logo">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <!-- logo -->
+                <a class="navbar-brand d-flex justify-content-between align-items-center" href="/">
+                    <img src="/img/logo.png" alt="site icon">
+                    <span class="text-uppercase fw-lighter ms-2">E-commerce</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+
+                <!-- links -->
+                <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+                    <ul class="navbar-nav mx-auto text-center">
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link text-uppercase text-dark" href="/">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/painel/cadastros"><ins>Cadastros</ins></a>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link text-uppercase text-dark" href="/painel/cadastros">Cadastros</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/painel/produtos">Produtos</a>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link adm-btn text-uppercase text-dark" href="/painel/categorias">Categorias</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/painel/itens">Itens</a>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link adm-btn text-uppercase text-dark" href="/painel/produtos">Produtos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/painel/categorias">Categorias</a>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link adm-btn text-uppercase text-dark" href="/painel/itens">Itens</a>
                         </li>
                     </ul>
                 </div>
