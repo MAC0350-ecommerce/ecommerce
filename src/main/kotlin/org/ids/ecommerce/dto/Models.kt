@@ -1,4 +1,4 @@
-package org.ids.ecommerce.dto
+ package org.ids.ecommerce.dto
 
 import org.ids.ecommerce.model.Foto
 import org.ids.ecommerce.model.Item

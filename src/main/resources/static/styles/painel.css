@@ -120,18 +120,6 @@ input {
     box-sizing: border-box;
 }
 
-#new_descricao {
-    overflow: auto;
-    white-space: pre-wrap;
-    min-height: 120px;
-    margin-bottom: 10px;
-}
-
-#new_ativado {
-    width: 45px; 
-    height: 25px;
-}
-
 .carousel-indicators [data-bs-target] {
     background-color: #000;
 }

@@ -115,12 +115,14 @@ new Vue({
     
                         // Preco
                         const precoCell = document.createElement('td');
-                        precoCell.textContent = row.preco;
+                        const formattedPrice = parseFloat(row.preco).toFixed(2);
+                        precoCell.textContent = formattedPrice;
                         tr.appendChild(precoCell);
     
                         // Data de Cadastro
                         const dataCell = document.createElement('td');
                         dataCell.textContent = row.dataCadastro;
+                        dataCell.style.width = '110px';
                         tr.appendChild(dataCell);
     
                         // Categoria
@@ -131,6 +133,10 @@ new Vue({
                         // Descricao
                         const descricaoCell = document.createElement('td');
                         descricaoCell.textContent = row.descricao;
+                        descricaoCell.style.overflow = 'auto';
+                        descricaoCell.style.whiteSpace = 'pre-wrap';
+                        descricaoCell.style.minHeight = '120px';
+                        descricaoCell.style.marginBottom = '10px';
                         tr.appendChild(descricaoCell);
     
                         // Ativado
@@ -142,6 +148,7 @@ new Vue({
                         const fotosCell = document.createElement('td');
                         if (row.fotos && row.fotos.length > 0) {
                             const carousel = createCarousel(row.id, row.fotos);
+                            fotosCell.style.width = '80px';
                             fotosCell.appendChild(carousel);
                         }
                         tr.appendChild(fotosCell);

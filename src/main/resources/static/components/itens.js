@@ -57,6 +57,7 @@ new Vue({
                         // Codigo
                         const codigoCell = document.createElement('td');
                         codigoCell.textContent = row.codigo;
+                        codigoCell.style.width = "360px";
                         tr.appendChild(codigoCell);
 
                         // Data de Cadastro
