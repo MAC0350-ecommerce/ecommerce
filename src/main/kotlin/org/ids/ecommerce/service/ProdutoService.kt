@@ -15,6 +15,21 @@ class ProdutoService (
     private var fotoRepository: FotoRepository,
     private var categoriaRepository: CategoriaRepository
 ){
+    fun findByIdAtivado(id: Int) : ProdutoRes {
+        var produto = produtoRepository.findByIdAndAtivadoTrue(id)
+        var produtoRes = ProdutoRes(
+            id = produto.id!!,
+            ativado = produto.ativado,
+            descricao = produto.descricao,
+            categoria = produto.categoria.id!!,
+            fotos = produto.fotos,
+            dataCadastro = produto.dataCadastro.toString(),
+            nome = produto.nome,
+            preco = produto.preco
+        )
+        return produtoRes;
+    }
+
     fun findAllAtivados() : List<ProdutoRes>{
         var lista = produtoRepository.findAllByAtivadoIsTrue().toList()
         var listaProdutos = mutableListOf<ProdutoRes>()
