@@ -25,9 +25,8 @@ new Vue({
             // POST request
             axios.post('http://localhost:8080/api/auth/login', data)
                 .then(response => {
-                    // Salva os tokens no localStorage
+                    // Salva o token no localStorage
                     localStorage.setItem('accessToken', response.data.accessToken);
-                    localStorage.setItem('refreshToken', response.data.refreshToken);
 
                     // Salva o token no cookie
                     document.cookie = "tokenAPP=" + response.data.accessToken + ";"
@@ -42,7 +41,6 @@ new Vue({
                     axios.get('http://localhost:8080/api/cadastros/' + this.login, { headers })
                         .then(response => {
                             // Salva informações do usuario no localStorage
-                            localStorage.setItem('login', this.login);
                             localStorage.setItem('nome', response.data.nome);
                             localStorage.setItem('foto', response.data.foto);
                             localStorage.setItem('papel', response.data.papel);
