@@ -43,7 +43,8 @@ class SegurancaApi(
                     "/Home.html",
                     "/views/login.html",
                     "/views/about.html",
-                    "/views/signup.html"
+                    "/views/signup.html",
+                    "/views/carrinho.html"
                 )
         }
     }
@@ -80,6 +81,9 @@ class SegurancaApi(
                     .requestMatchers(antMatcher(HttpMethod.GET, "/painel")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/painel/*")).hasRole("ADMIN")
                     .requestMatchers(antMatcher(HttpMethod.GET, "/views/painel/*")).permitAll()
+
+                    /* Carrinho */
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/carrinho")).permitAll()
 
                     /* Login */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/login")).permitAll()

@@ -30,7 +30,7 @@ new Vue({
     mounted() {
         this.displayUserImage();
         this.nome = localStorage.getItem('nome');
-        this.papel = localStorage.getItem('papel');
+        this.papel = localStorage.getItem('papel'); 
 
         this.itens_carrinho = localStorage.getItem('itens_carrinho'); 
         this.itens_carrinho = (this.itens_carrinho === null) ? [] : this.itens_carrinho.split(','); 
@@ -61,18 +61,17 @@ new Vue({
     methods: {
         disconnect() {
             // Limpa os itens da localStorage
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('login');
             localStorage.removeItem('nome');
             localStorage.removeItem('foto');
             localStorage.removeItem('papel');
+            localStorage.removeItem('accessToken');
             localStorage.removeItem('itens_carrinho');
 
             // Limpa os cookies
             document.cookie = "";
 
-            // Refresh na pagina
-            location.reload();
+            // refresh
+            window.location.href = '/';
         },
 
         // Exibe a foto do usuário
