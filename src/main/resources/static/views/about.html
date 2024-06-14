@@ -27,11 +27,17 @@
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
                         <img id="display1" src="" alt="" class="user-img">
             
-                        <span class="ms-2 nome-usuario" v-if="nome">{{ nome }}</span>
-                        <span class="ms-2 nome-usuario" v-if="!nome">DESCONECTADO</span>
+                        <div v-if="nome" class="row">
+                            <div class="col">
+                                <span class="ms-2"><strong>Bem-vindo</strong></span>
+                                <br>
+                                <span class="ms-2">{{ nome }}</span>
+                            </div>
+                        </div>
                         
                         <a href="/carrinho" class="ms-4">
-                            <img class="icone-carrinho" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="icone carrinho">
+                            <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
+                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">!</span>
                         </a>
                     </div>
             

@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="styles/Home.css">
 </head>
 <body>
-    <header>
-        <div id="app">
+    <div id="app">
+        <header>
         
             <!-- navbar -->
             <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4">
@@ -27,11 +27,17 @@
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
                         <img id="display1" src="" alt="" class="user-img">
             
-                        <span class="ms-2 nome-usuario" v-if="nome">{{ nome }}</span>
-                        <span class="ms-2 nome-usuario" v-if="!nome">DESCONECTADO</span>
+                        <div v-if="nome" class="row">
+                            <div class="col">
+                                <span class="ms-2"><strong>Bem-vindo</strong></span>
+                                <br>
+                                <span class="ms-2">{{ nome }}</span>
+                            </div>
+                        </div>
             
                         <a href="/carrinho" class="ms-4">
-                            <img class="icone-carrinho" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="icone carrinho">
+                            <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
+                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">!</span>
                         </a>
                     </div>
             
@@ -40,7 +46,7 @@
                     </button>
 
                     <!-- links -->
-                    <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+                    <div class = "collapse navbar-collapse order-lg-1 justify-content-center" id = "navMenu">
                         <ul class = "navbar-nav mx-auto text-center">
                             <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "/">Home</a>
@@ -61,40 +67,38 @@
                     </div>
                 </div>
             </nav>
-        </div>  
-    </header>
+        </header>
 
-    <div class="loading" id="loading">Carregando dados...</div>
-    
-    <!-- Catalogo de produtos -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center">Bem-vindo à nossa loja!</h1>
+        <div class="loading" id="loading">Carregando dados...</div>
+        <p>{{ itens_carrinho }}</p>
+        <!-- Catalogo de produtos -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center">Bem-vindo à nossa loja!</h1>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">Produtos em destaque</h2>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">Produtos em destaque</h2>
+                </div>
             </div>
         </div>
-    </div>
-
-
-    <div class="container mt-5">
-        <div id="productCarouselContainer" class="row">
-            <!-- Carousel will be injected here by JavaScript -->
+        <div class="container mt-5">
+            <div id="productCarouselContainer" class="row">
+                <!-- Carousel eh carregado aqui -->
+            </div>
         </div>
+        
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
+            </div>
+        </footer>
     </div>
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
-        </div>
-    </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
