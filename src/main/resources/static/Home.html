@@ -37,7 +37,7 @@
                         
                         <a :href="nome ? '/carrinho' : '/login'" class="ms-4">
                             <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
-                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">!</span>
+                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">{{ itens_carrinho.length }}</span>
                         </a>
                     </div>
             

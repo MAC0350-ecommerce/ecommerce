@@ -61,11 +61,28 @@
                     </div>
                 </div>
             </nav>
-        </div>        
-    </header>
+        </header>
 
-    <div class="about-container">
-        <h2>Carrinho</h2>
+        
+        <div class="loading" id="loading">Carregando dados...</div>
+
+        <div class="about-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>Carrinho de compras</h2>
+                    </div>
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-primary" @click="limparCarrinho">
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+                <div id="cart" class="row mt-4">
+                    <!--  -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

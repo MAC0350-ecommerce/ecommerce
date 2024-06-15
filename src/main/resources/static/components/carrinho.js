@@ -78,7 +78,8 @@ new Vue({
     data: {
         nome: null,
         papel: null,
-        itens_carrinho: []
+        itens_carrinho: [],
+        quantidade: {}
     },
     mounted() {
         this.displayUserImage();
@@ -94,6 +95,88 @@ new Vue({
             Authorization: 'Bearer ' + accessToken
         };
 
+
+        waitForElementToExist('#loading').then(loading => {
+            // pega a quantidade de cada item
+            this.itens_carrinho.forEach(item => {
+                if (item in this.quantidade) {
+                    this.quantidade[item]++;
+                } else {
+                    this.quantidade[item] = 1;
+                }
+            });
+
+            loading.classList.add('d-none'); // esconde o loading
+
+            // carrega os produtos
+            for (let item in this.quantidade) {
+                axios.get('http://localhost:8080/api/produtos/ativados/' + item)
+                .then(response => {
+                    const produto = response.data;
+                    const cartDiv = document.getElementById('cart');
+
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col-md-12 mb-4';
+
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card';
+
+                    const carouselDiv = createCarousel(produto.id, produto.fotos);
+
+                    const cardBodyDiv = document.createElement('div');
+                    cardBodyDiv.className = 'card-body';
+
+                    const productName = document.createElement('h5');
+                    productName.className = 'card-title';
+                    productName.textContent = produto.nome;
+
+                    // Create the "X" image for removing the item
+                    const removeIcon = document.createElement('img');
+                    removeIcon.src = '/img/remove-icon.png';
+                    removeIcon.style.width = '20px';
+                    removeIcon.style.height = '20px';
+                    removeIcon.style.cursor = 'pointer';
+                    removeIcon.style.float = 'right'; 
+                    removeIcon.addEventListener('click', () => {
+                        this.removeItemFromCart(item);
+                    });
+
+                    const productDescription = document.createElement('p');
+                    productDescription.className = 'card-text';
+                    productDescription.textContent = produto.descricao;
+
+                    const productPriceDiv = document.createElement('div');
+                    productPriceDiv.className = 'product-price';
+
+                    const productPrice = document.createElement('p');
+                    productPrice.className = 'card-text';
+                    productPrice.innerHTML = `<strong>R$ ${produto.preco.toFixed(2)}</strong>`;
+
+                    const quantityControls = this.createQuantityControls(produto.id, this.quantidade[item]);
+
+                    productPriceDiv.appendChild(productPrice);
+                    productPriceDiv.appendChild(quantityControls);
+
+                    productName.appendChild(removeIcon); // Append the "X" icon to the product name
+                    cardBodyDiv.appendChild(productName);
+                    cardBodyDiv.appendChild(productDescription);
+                    cardBodyDiv.appendChild(productPriceDiv);
+
+                    cardDiv.appendChild(carouselDiv);
+                    cardDiv.appendChild(cardBodyDiv);
+
+                    colDiv.appendChild(cardDiv);
+
+                    cartDiv.appendChild(colDiv);
+
+                    qt = 1;
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Erro ao carregar os produtos');
+                });
+            }
+        });
         // ...
     },
     methods: {
@@ -112,7 +195,6 @@ new Vue({
             window.location.href = '/';
         },
 
-        // Exibe a foto do usuário
         displayUserImage() {
             var userImg = document.getElementById('display1');
             const foto = localStorage.getItem('foto');
@@ -122,6 +204,64 @@ new Vue({
             else {
                 userImg.src = '../img/usuario_padrao.png';
             }
+        },
+
+        createQuantityControls(id, qt) {
+            const div = document.createElement('div');
+            div.className = 'quantity-controls';
+        
+            // botao da esquerda
+            const decrementButton = document.createElement('button');
+            decrementButton.className = 'btn btn-secondary btn-sm decrement-button';
+            decrementButton.textContent = '-';
+            decrementButton.onclick = function() {
+                const quantityInput = this.nextElementSibling;
+                let quantity = parseInt(quantityInput.value, 10);
+                if (quantity > 1) {
+                    quantityInput.value = --quantity;
+                }
+                this.quantidade[id] = quantity;
+            };
+        
+            // quantidade
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'text';
+            quantityInput.value = qt;
+            quantityInput.className = 'form-control form-control-sm';
+            quantityInput.style.width = '40px';
+            quantityInput.readOnly = true;
+            quantityInput.id = `quantity-${id}`;
+        
+            // botao da direita
+            const incrementButton = document.createElement('button');
+            incrementButton.className = 'btn btn-secondary btn-sm increment-button';
+            incrementButton.textContent = '+';
+            incrementButton.onclick = function() {
+                const quantityInput = this.previousElementSibling;
+                let quantity = parseInt(quantityInput.value, 10);
+                quantityInput.value = ++quantity;
+                this.quantidade[id] = quantity;
+            };
+        
+            div.appendChild(decrementButton);
+            div.appendChild(quantityInput);
+            div.appendChild(incrementButton);
+        
+            return div;
+        },
+        
+        limparCarrinho() {
+            localStorage.removeItem('itens_carrinho');
+            window.location.reload();
+        },
+
+        removeItemFromCart(item) {
+            this.itens_carrinho = this.itens_carrinho.filter(cartItem => cartItem !== item);
+            localStorage.setItem('itens_carrinho', this.itens_carrinho);
+            if (this.itens_carrinho.length === 0) {
+                localStorage.removeItem('itens_carrinho');
+            }
+            window.location.reload();
         }
     }
 });
