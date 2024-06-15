@@ -95,6 +95,7 @@ class SegurancaApi(
                     /* Produtos */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/ativados")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/api/produtos/ativados/*")).permitAll()
                     .requestMatchers(antMatcher(HttpMethod.POST, "/api/produtos/")).hasRole("ADMIN")
 
                     /* Cadastros e autenticacao */
