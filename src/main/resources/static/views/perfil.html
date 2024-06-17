@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Store</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/carrinho.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/Home.css">
 </head>
 <body>
     <header>
         <div id="app">
-            
+    
             <!-- navbar -->
             <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4">
                 <div class = "container">
@@ -28,7 +28,7 @@
                         <a :href="nome ? '/perfil' : '/login'" class="ms-4">
                             <img id="display1" src="" alt="" class="user-img">
                         </a>
-            
+                        
                         <div v-if="nome" class="row">
                             <div class="col">
                                 <span class="ms-2"><strong>Bem-vindo</strong></span>
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         
-                        <a href="/carrinho" class="ms-4">
+                        <a :href="nome ? '/carrinho' : '/login'" class="ms-4">
                             <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
                             <span v-if="itens_carrinho.length > 0" class="badge bg-info">{{ itens_carrinho.length }}</span>
                         </a>
@@ -48,7 +48,7 @@
                     </button>
 
                     <!-- links -->
-                    <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+                    <div class = "collapse navbar-collapse order-lg-1 justify-content-center" id = "navMenu">
                         <ul class = "navbar-nav mx-auto text-center">
                             <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "/">Home</a>
@@ -75,39 +75,23 @@
         </div>        
     </header>
 
+    <div class="loading" id="loading">Carregando dados...</div>
 
-<div class="about-container">
-    <main>
-        <section>
-            <h2>Projeto</h2>
-            <p>Projeto desenvolvido para a disciplina de <a href="https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAC0350&codcur=45052&codhab=1" target="_blank">MAC0350</a> - Introdução ao Desenvolvimento de Sistemas de Software</p>
-            <p>Universidade de São Paulo - USP</p>
-            <p>Instituto de Matemática e Estatística - IME (01/2024)</p>
-            <p>Ministrada por <a href="https://lattes.ime.usp.br/mac/membro-2193972715230641.html" target="_blank">Paulo Roberto Miranda Meirelles</a></p>
-        </section>
-        <section>
-            <h2>Criadores</h2>
-            <ul>
-                <li>Marcelo Nascimento</li>
-                <li>Victor Nascimento Ribeiro</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Código fonte</h2>
-            <a href="https://github.com/MAC0350-ecommerce/ecommerce/" target="_blank">
-                <img width="80" height="45" src="../img/GitHub-Logo.png">
-            </a>
-            </section>
-    </main>
-</div>
+    <div class="about-container">
+        <div class="container">
+            <h2>Pedidos</h2>
+        </div>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
+        <!-- lista de pedidos -->
+        <div id="pedidos" class="row mt-4">
+            <!--  -->
+        </div>
     </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="../components/Home.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../components/perfil.js"></script>
 </body>
 </html>

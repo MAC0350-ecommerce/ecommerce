@@ -52,6 +52,7 @@ body {
 }
 
 
+
 input {
     width: 100%;
     padding: 12px;
@@ -134,13 +135,14 @@ input {
     filter: invert(100%);
 }
 
+
 /* navbar */
 .navbar{
     -webkit-box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
             box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-brand img{
-    width: 33px;
+    width: 40px;
 }
 .navbar-brand span{
     letter-spacing: 2px;
@@ -155,6 +157,12 @@ input {
 .navbar-nav {
     flex-direction: row;
     align-items: center;
+}
+
+.icone-carrinho {
+    width: 40px; 
+    height: 40px;
+    margin-left: -15px;
 }
 
 .navbar .container {

@@ -44,7 +44,8 @@ class SegurancaApi(
                     "/views/login.html",
                     "/views/about.html",
                     "/views/signup.html",
-                    "/views/carrinho.html"
+                    "/views/carrinho.html",
+                    "/views/perfil.html",
                 )
         }
     }
@@ -84,6 +85,9 @@ class SegurancaApi(
 
                     /* Carrinho */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/carrinho")).permitAll()
+
+                    /* Perfil */
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/perfil")).permitAll()
 
                     /* Login */
                     .requestMatchers(antMatcher(HttpMethod.GET, "/login")).permitAll()
