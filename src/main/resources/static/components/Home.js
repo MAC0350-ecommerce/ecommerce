@@ -137,7 +137,7 @@ new Vue({
                 if (this.nome !== null) {
                     this.itens_carrinho.push(id);
                     localStorage.setItem('itens_carrinho', this.itens_carrinho);
-                    alert('Produto adicionado ao carrinho!');
+                    addToCartButton.classList.add('click-animation');
                 }
                 else {
                     window.location.href = '/login';
