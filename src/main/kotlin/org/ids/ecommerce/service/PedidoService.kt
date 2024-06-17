@@ -69,10 +69,11 @@ class PedidoService(
             }
         }
 
-        var status = if (Random.nextBoolean()) StatusPagamento.PAGO else StatusPagamento.ERRO
-        var foiEntregue = if (status == StatusPagamento.ERRO) false else Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextBoolean()
+        val status = if (Random.nextInt(0, 10) > 3) StatusPagamento.PAGO else StatusPagamento.ERRO
+        val foiEntregue = if (status == StatusPagamento.ERRO) false
+            else Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextInt(0, 10) > 3
 
-        var novoPedido = Pedido(
+        val novoPedido = Pedido(
             id = null,
             valorTotal = checkPedido.valorTotal,
             enderecoEntrega = pedidoReq.enderecoEntrega!!,
