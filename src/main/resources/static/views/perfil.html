@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div id="app">
+    <div id="app">
+        <header>
     
             <!-- navbar -->
             <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4">
@@ -72,21 +72,36 @@
                     </div>
                 </div>
             </nav>
-        </div>        
-    </header>
+        </header>
 
-    <div class="loading" id="loading">Carregando dados...</div>
+        <div class="loading" id="loading">Carregando dados...</div>
 
-    <div class="about-container">
-        <div class="container">
-            <h2>Pedidos</h2>
+        <div class="about-container">
+            <div class="container profile-container">
+                <!-- perfil -->
+                <h2 class="mb-4">Perfil do Usuário</h2>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="" alt="Foto do Perfil" class="profile-image" id="profile-image">
+                    </div>
+                    <div class="col-md-8" >
+                        <p><strong>ID:</strong> <span id="profile-id"></span></p>
+                        <p><strong>Nome:</strong> <span id="profile-name"></span></p>
+                        <p><strong>Login:</strong> <span id="profile-login"></span></p>
+                        <p><strong>Senha:</strong> ******</p>
+                        <p><strong>Papel:</strong> <span id="profile-role"></span></p>
+                    </div>
+
+                    <hr class="separator">
+
+                    <!-- pedidos -->
+                    <div id="pedidosContainer">
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- lista de pedidos -->
-        <div id="pedidos" class="row mt-4">
-            <!--  -->
-        </div>
-    </div>
+    </div>        
 
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

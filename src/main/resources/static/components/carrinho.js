@@ -124,7 +124,6 @@ new Vue({
                     productName.className = 'card-title';
                     productName.textContent = produto.nome;
 
-                    // Create the "X" image for removing the item
                     const removeIcon = document.createElement('img');
                     removeIcon.src = '/img/remove-icon.png';
                     removeIcon.style.width = '20px';
@@ -171,7 +170,6 @@ new Vue({
                 });
             }
         });
-        // ...
     },
     methods: {
         disconnect() {

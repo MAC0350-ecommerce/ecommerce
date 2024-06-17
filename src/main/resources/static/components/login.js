@@ -45,6 +45,7 @@ new Vue({
                             localStorage.setItem('foto', response.data.foto);
                             localStorage.setItem('papel', response.data.papel);
                             localStorage.setItem('id', response.data.id);
+                            localStorage.setItem('login', response.data.login);
 
                             // Redireciona pra Home
                             window.location.href = '/';
