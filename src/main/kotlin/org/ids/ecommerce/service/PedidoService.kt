@@ -37,7 +37,7 @@ class PedidoService(
 
         var precoFrete = 0.0;
         if (pedidoReq.enderecoEntrega!!.isNotBlank()) {
-            precoFrete += Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextDouble() * 1000 + 50
+            precoFrete += Random(pedidoReq.enderecoEntrega?.toHashSet().hashCode()).nextDouble(0.0, 100.0)
         }
 
         valorTotal += precoFrete
