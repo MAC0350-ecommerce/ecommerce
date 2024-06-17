@@ -25,8 +25,10 @@
 
                     <!-- botoes a direita -->
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
-                        <img id="display1" src="" alt="" class="user-img">
-            
+                        <a :href="nome ? '/perfil' : '/login'" class="ms-4">
+                            <img id="display1" src="" alt="" class="user-img">
+                        </a>
+                        
                         <div v-if="nome" class="row">
                             <div class="col">
                                 <span class="ms-2"><strong>Bem-vindo</strong></span>
@@ -70,7 +72,6 @@
         </header>
 
         <div class="loading" id="loading">Carregando dados...</div>
-        <p>{{ itens_carrinho }}</p>
         <!-- Catalogo de produtos -->
         <div class="container mt-5">
             <div class="row">

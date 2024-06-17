@@ -25,7 +25,9 @@
 
                     <!-- botoes a direita -->
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
-                        <img id="display1" src="" alt="" class="user-img">
+                        <a :href="nome ? '/perfil' : '/login'" class="ms-4">
+                            <img id="display1" src="" alt="" class="user-img">
+                        </a>
             
                         <div v-if="nome" class="row">
                             <div class="col">

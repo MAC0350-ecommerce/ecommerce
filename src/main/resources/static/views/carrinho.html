@@ -24,8 +24,9 @@
 
                     <!-- botoes a direita -->
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
-                        <img id="display1" src="" alt="" class="user-img">
-            
+                        <a :href="nome ? '/perfil' : '/login'" class="ms-4">
+                            <img id="display1" src="" alt="" class="user-img">
+                        </a>
                         <div v-if="nome" class="row">
                             <div class="col">
                                 <span class="ms-2"><strong>Bem-vindo</strong></span>
@@ -63,23 +64,63 @@
             </nav>
         </header>
 
-        
         <div class="loading" id="loading">Carregando dados...</div>
 
         <div class="about-container">
             <div class="container">
+                <!-- titulo + botao limpar -->
                 <div class="row">
                     <div class="col">
                         <h2>Carrinho de compras</h2>
                     </div>
                     <div class="col text-end">
-                        <button type="button" class="btn btn-primary" @click="limparCarrinho">
+                        <button type="button" class="btn btn-secondary" @click="limparCarrinho">
                             Limpar
                         </button>
                     </div>
                 </div>
+
+                <!-- carrinho -->
                 <div id="cart" class="row mt-4">
                     <!--  -->
+                </div>
+
+                <!-- calculo preco total e frete -->
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" v-model="endereco" id="endereco" placeholder="Endereço de Entrega">
+                    </div>
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-secondary" @click="calcularTotal">
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Valores -->
+                <div id="frete" class="valor" style="margin-top: 20px;"></div>
+                <div id="preco" class="valor"></div>
+                <hr class="separator">
+                <div class="row">
+                    <div class="col">
+                        <div id="total" class="valor"></div>
+                    </div>
+                    <div class="col text-end">
+                        <button id="botao" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#modalImagem" @click="geraPedido">
+                            Pagar
+                        </button>
+                    </div>
+                </div>
+
+               <!-- QR code -->
+                <div class="modal fade" id="modalImagem">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/img/QRcode.png" class="img-fluid" alt="QRcode">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -60,6 +60,15 @@ input {
     box-sizing: border-box;
 }
 
+.valor {
+    font-size: 17px;
+}
+
+.separator {
+    margin: 10px 0;
+    border-top: 1px solid #444242;
+}
+
 .card {
     display: flex;
     flex-direction: row;

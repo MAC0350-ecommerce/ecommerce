@@ -78,6 +78,7 @@ new Vue({
     data: {
         nome: null,
         papel: null,
+        endereco: null,
         itens_carrinho: [],
         quantidade: {}
     },
@@ -88,13 +89,6 @@ new Vue({
 
         this.itens_carrinho = localStorage.getItem('itens_carrinho'); 
         this.itens_carrinho = (this.itens_carrinho === null) ? [] : this.itens_carrinho.split(','); 
-
-        // Pega o token
-        const accessToken = localStorage.getItem('accessToken');
-        const headers = {
-            Authorization: 'Bearer ' + accessToken
-        };
-
 
         waitForElementToExist('#loading').then(loading => {
             // pega a quantidade de cada item
@@ -152,7 +146,7 @@ new Vue({
                     productPrice.className = 'card-text';
                     productPrice.innerHTML = `<strong>R$ ${produto.preco.toFixed(2)}</strong>`;
 
-                    const quantityControls = this.createQuantityControls(produto.id, this.quantidade[item]);
+                    const quantityControls = this.createQuantityControls(produto.id, this.quantidade[item], this.quantidade);
 
                     productPriceDiv.appendChild(productPrice);
                     productPriceDiv.appendChild(quantityControls);
@@ -206,7 +200,7 @@ new Vue({
             }
         },
 
-        createQuantityControls(id, qt) {
+        createQuantityControls(id, qt, quantidade) {
             const div = document.createElement('div');
             div.className = 'quantity-controls';
         
@@ -220,10 +214,10 @@ new Vue({
                 if (quantity > 1) {
                     quantityInput.value = --quantity;
                 }
-                this.quantidade[id] = quantity;
+                quantidade[id] = quantity;
             };
         
-            // quantidade
+            // valor do meio
             const quantityInput = document.createElement('input');
             quantityInput.type = 'text';
             quantityInput.value = qt;
@@ -240,7 +234,7 @@ new Vue({
                 const quantityInput = this.previousElementSibling;
                 let quantity = parseInt(quantityInput.value, 10);
                 quantityInput.value = ++quantity;
-                this.quantidade[id] = quantity;
+                quantidade[id] = quantity;
             };
         
             div.appendChild(decrementButton);
@@ -262,6 +256,80 @@ new Vue({
                 localStorage.removeItem('itens_carrinho');
             }
             window.location.reload();
+        },
+
+        calcularTotal() {
+            // Verifica se o endereço foi preenchido
+            if (this.endereco === null || this.endereco === '') {
+                alert('Preencha o endereço de entrega');
+                return;
+            }
+
+            // Pega os produtos do carrinho e organiza um mapa
+            const produtos = [];
+            for (let item in this.quantidade) {
+                produtos.push({
+                    produto_id: item,
+                    quantidade: this.quantidade[item]
+                });
+            }
+
+            // organiza body da requisicao
+            const data = {
+                "usuario_id": localStorage.getItem('id'),
+                "produtos": produtos,
+                "enderecoEntrega": this.endereco
+            };
+
+            // POST request
+            axios.post('http://localhost:8080/api/pedidos/check', data)
+                .then(response => {
+                    const frete = response.data.precoFrete;
+                    const preco = response.data.valorTotal - frete;
+                    
+                    document.getElementById('frete').innerText = `Frete:  R$ ${frete.toFixed(2)}`;
+                    document.getElementById('preco').innerText = `Preço: R$ ${preco.toFixed(2)}`;
+                    document.getElementById('total').innerHTML = `<strong>Total: R$ ${(preco + frete).toFixed(2)}</strong>`;
+                    
+                    // Mostrar o botão apenas se o total for definido
+                    if ((preco + frete) !== undefined) {
+                        document.getElementById('botao').classList.remove('d-none');
+                    }
+                })
+                .catch(error => {
+                    alert(error);
+                });
+        },
+
+        geraPedido() {
+            // Pega os produtos do carrinho e organiza um mapa
+            const produtos = [];
+            for (let item in this.quantidade) {
+                produtos.push({
+                    produto_id: item,
+                    quantidade: this.quantidade[item]
+                });
+            }
+
+            // organiza body da requisicao
+            const data = {
+                "usuario_id": localStorage.getItem('id'),
+                "produtos": produtos,
+                "enderecoEntrega": this.endereco
+            };
+
+            // POST request
+            axios.post('http://localhost:8080/api/pedidos/', data)
+                .then(response => {
+                    // limpa o carrinho
+                    localStorage.removeItem('itens_carrinho');
+                })
+                .catch(error => {
+                    alert(error);
+                    window.location.reload();
+                });
+
+            
         }
     }
 });

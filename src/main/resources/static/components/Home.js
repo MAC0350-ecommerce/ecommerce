@@ -66,6 +66,7 @@ new Vue({
             localStorage.removeItem('papel');
             localStorage.removeItem('accessToken');
             localStorage.removeItem('itens_carrinho');
+            localStorage.removeItem('id');
 
             // Limpa os cookies
             document.cookie = "";
