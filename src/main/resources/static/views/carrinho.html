@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Store</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/carrinho.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/Home.css">
 </head>
 <body>
     <div id="app">
         <header>
-        
             <!-- navbar -->
             <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4">
                 <div class = "container">
@@ -28,7 +27,6 @@
                         <a :href="nome ? '/perfil' : '/login'" class="ms-4">
                             <img id="display1" src="" alt="" class="user-img">
                         </a>
-                        
                         <div v-if="nome" class="row">
                             <div class="col">
                                 <span class="ms-2"><strong>Bem-vindo</strong></span>
@@ -36,11 +34,6 @@
                                 <span class="ms-2">{{ nome }}</span>
                             </div>
                         </div>
-                        
-                        <a :href="nome ? '/carrinho' : '/login'" class="ms-4">
-                            <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
-                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">{{ itens_carrinho.length }}</span>
-                        </a>
                     </div>
             
                     <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
@@ -75,40 +68,70 @@
         </header>
 
         <div class="loading" id="loading">Carregando dados...</div>
-        
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center">Bem-vindo à nossa loja!</h1>
-                </div>
-            </div>
-        </div>
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Produtos em destaque</h2>
+        <div class="about-container">
+            <div class="container">
+                <!-- titulo + botao limpar -->
+                <div class="row">
+                    <div class="col">
+                        <h2>Carrinho de compras</h2>
+                    </div>
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-secondary" @click="limparCarrinho">
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- carrinho -->
+                <div id="cart" class="row mt-4">
+                    <!--  -->
+                </div>
+
+                <!-- calculo preco total e frete -->
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" v-model="endereco" id="endereco" placeholder="Endereço de Entrega">
+                    </div>
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-secondary" @click="calcularTotal">
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Valores -->
+                <div id="frete" class="valor" style="margin-top: 20px;"></div>
+                <div id="preco" class="valor"></div>
+                <hr class="separator">
+                <div class="row">
+                    <div class="col">
+                        <div id="total" class="valor"></div>
+                    </div>
+                    <div class="col text-end">
+                        <button id="botao" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#modalImagem" @click="geraPedido">
+                            Pagar
+                        </button>
+                    </div>
+                </div>
+
+               <!-- QR code -->
+                <div class="modal fade" id="modalImagem">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/img/QRcode.png" class="img-fluid" alt="QRcode">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Catalogo de produtos -->
-        <div class="container mt-5">
-            <div id="productCarouselContainer" class="row">
-                <!-- Carousel eh carregado aqui -->
-            </div>
-        </div>
-        
-        <footer>
-            <div class="container">
-                <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
-            </div>
-        </footer>
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/components/Home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../components/carrinho.js"></script>
 </body>
 </html>

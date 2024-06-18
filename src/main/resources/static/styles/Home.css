@@ -11,12 +11,6 @@ body {
     padding: 0 20px;
 }
 
-.user {
-    display: flex;
-    align-items: center;
-    margin-right: 63px;
-}
-
 .user-img {
     width: 40px; 
     height: 40px;
@@ -101,10 +95,34 @@ body {
 .icone-carrinho {
     width: 40px; 
     height: 40px;
-    margin-left: 5px;
+    margin-left: -15px;
 }
 
-.nome-usuario {
-    display: block; 
-    width: 100px;
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-brand {
+    margin-right: auto;
+}
+
+.collapse.navbar-collapse {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-grow: 0;
+}
+
+/* Animacao comprar */
+@keyframes clickEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.click-animation {
+    animation: clickEffect 0.3s;
 }

@@ -25,13 +25,21 @@
 
                     <!-- botoes a direita -->
                     <div class = "order-lg-2 nav-btns d-flex align-items-center">
-                        <img id="display1" src="" alt="" class="user-img">
+                        <a :href="nome ? '/perfil' : '/login'" class="ms-4">
+                            <img id="display1" src="" alt="" class="user-img">
+                        </a>
             
-                        <span class="ms-2 nome-usuario" v-if="nome">{{ nome }}</span>
-                        <span class="ms-2 nome-usuario" v-if="!nome">DESCONECTADO</span>
+                        <div v-if="nome" class="row">
+                            <div class="col">
+                                <span class="ms-2"><strong>Bem-vindo</strong></span>
+                                <br>
+                                <span class="ms-2">{{ nome }}</span>
+                            </div>
+                        </div>
                         
                         <a href="/carrinho" class="ms-4">
-                            <img class="icone-carrinho" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="icone carrinho">
+                            <img class="icone-carrinho" src="/img/carrinho.png" alt="icone carrinho">
+                            <span v-if="itens_carrinho.length > 0" class="badge bg-info">{{ itens_carrinho.length }}</span>
                         </a>
                     </div>
             
@@ -44,6 +52,9 @@
                         <ul class = "navbar-nav mx-auto text-center">
                             <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "/">Home</a>
+                            </li>
+                            <li class = "nav-item px-2 py-2">
+                                <a class = "nav-link text-uppercase text-dark" href = "/perfil">Perfil</a>
                             </li>
                             <li class = "nav-item px-2 py-2">
                                 <a class = "nav-link text-uppercase text-dark" href = "/sobre">Sobre Nós</a>

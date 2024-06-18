@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Store</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/carrinho.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/Home.css">
 </head>
 <body>
     <div id="app">
         <header>
-        
+    
             <!-- navbar -->
             <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4">
                 <div class = "container">
@@ -75,40 +75,38 @@
         </header>
 
         <div class="loading" id="loading">Carregando dados...</div>
-        
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center">Bem-vindo à nossa loja!</h1>
+
+        <div class="about-container">
+            <div class="container profile-container">
+                <!-- perfil -->
+                <h2 class="mb-4">Perfil do Usuário</h2>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="" alt="Foto do Perfil" class="profile-image" id="profile-image">
+                    </div>
+                    <div class="col-md-8" >
+                        <p><strong>ID:</strong> <span id="profile-id"></span></p>
+                        <p><strong>Nome:</strong> <span id="profile-name"></span></p>
+                        <p><strong>Login:</strong> <span id="profile-login"></span></p>
+                        <p><strong>Senha:</strong> ******</p>
+                        <p><strong>Papel:</strong> <span id="profile-role"></span></p>
+                    </div>
+
+                    <hr class="separator">
+
+                    <!-- pedidos -->
+                    <div id="pedidosContainer">
+                        <!--  -->
+                    </div>
                 </div>
             </div>
         </div>
+    </div>        
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center">Produtos em destaque</h2>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Catalogo de produtos -->
-        <div class="container mt-5">
-            <div id="productCarouselContainer" class="row">
-                <!-- Carousel eh carregado aqui -->
-            </div>
-        </div>
-        
-        <footer>
-            <div class="container">
-                <p>&copy; 2024 E-commerce MAC0350 IME-USP</p>
-            </div>
-        </footer>
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/components/Home.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../components/perfil.js"></script>
 </body>
 </html>

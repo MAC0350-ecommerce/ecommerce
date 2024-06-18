@@ -67,9 +67,7 @@ new Vue({
 
                         tableBody.appendChild(tr);
                     });
-
-                    // Hide loading text and show the table
-                    loading.classList.add('d-none');
+                    loading.classList.add('d-none'); // Esconde o loading
                     table.classList.remove('d-none');
                 });
             })
